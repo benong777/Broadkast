@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.email }}'s Page{% endblock %}
+
+{% block body %}
+<h1>{{ user.email }}</h1>
+<ul>
+{% for comment in user.comments %}
+    <li>
+        {{ comment.user.fname }}:
+        <span class=rating_num_{{ comment.comment_id }} >
+            {{ comment.comment }}
+        </span>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

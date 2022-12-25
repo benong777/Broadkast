@@ -1,0 +1,106 @@
+"""Models for location status app."""
+
+from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class User(db.Model):
+    """A user."""
+
+    __tablename__ = "users"
+
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    fname = db.Column(db.String)
+    lname = db.Column(db.String)
+    email = db.Column(db.String, unique=True)
+    password = db.Column(db.String)
+    phone_num = db.Column(db.String)
+    created_at = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
+
+    comments = db.relationship("Comment", back_populates="user")
+    ratings = db.relationship("Rating", back_populates="user")
+
+    def __repr__(self):
+        return f"<User user_id={self.user_id} email={self.email}>"
+
+
+class Location(db.Model):
+    """A location."""
+
+    __tablename__ = "locations"
+
+    location_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    name = db.Column(db.String)
+    description = db.Column(db.Text)
+    addr = db.Column(db.String)
+    long = db.Column(db.Float)
+    lat  = db.Column(db.Float)
+    created_at = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
+
+    comments = db.relationship("Comment", back_populates="location")
+    ratings = db.relationship("Rating", back_populates="location")
+
+    def __repr__(self):
+        return f"<Location location_id={self.location_id} name={self.name}>"
+
+
+class Comment(db.Model):
+    """A comment."""
+
+    __tablename__ = "comments"
+
+    comment_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+    location_id = db.Column(db.Integer, db.ForeignKey("locations.location_id"))
+    comment = db.Column(db.Text)
+    created_at = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
+
+    user = db.relationship("User", back_populates="comments")
+    location = db.relationship("Location", back_populates="comments")
+
+    def __repr__(self):
+        return f"<Comment user={self.user} name={self.location} comment={self.comment}>"
+
+
+class Rating(db.Model):
+    """A rating."""
+
+    __tablename__ = "ratings"
+
+    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+    location_id = db.Column(db.Integer, db.ForeignKey("locations.location_id"))
+    rating = db.Column(db.String)
+    created_at = db.Column(db.DateTime)
+    active = db.Column(db.Boolean)
+
+    user = db.relationship("User", back_populates="ratings")
+    location = db.relationship("Location", back_populates="ratings")
+
+    def __repr__(self):
+        return f"<Rating rating_id={self.rating_id} name={self.rating}>"
+
+
+def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print("Connected to the db!")
+
+
+if __name__ == "__main__":
+    from server import app
+
+    # Call connect_to_db(app, echo=False) if your program output gets
+    # too annoying; this will tell SQLAlchemy not to print out every
+    # query it executes.
+
+    connect_to_db(app)
