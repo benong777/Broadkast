@@ -1,8 +1,8 @@
 """CRUD operations."""
 
 from datetime import datetime
-# from model import db, User, Comment, Location, Status, Rating, connect_to_db
-from model import db, User, Location, Comment, Rating, connect_to_db
+from model import db, User, Location, Comment, Rating, Favorite, connect_to_db
+# from model import db, User, Location, Comment, Rating, connect_to_db
 
 
 def create_user(fname, lname, email, password, phone_num, created_at, active):
@@ -48,6 +48,13 @@ def create_comment(user, location, comment, created_at, active):
     return new_comment
 
 
+def update_comment(comment_id, new_comment):
+    """ Update a comment given comment_id and the updated score. """
+
+    comment = Comment.query.get(comment_id)
+    comment.comment = new_comment
+
+
 def create_rating(user, location, rating_score, created_at, active):
     """Create and return a new rating."""
 
@@ -59,6 +66,24 @@ def create_rating(user, location, rating_score, created_at, active):
                     active=active
                     )
     return rating
+
+
+def update_rating(rating_id, new_score):
+    """ Update a rating given rating_id and the updated score. """
+
+    rating = Rating.query.get(rating_id)
+    rating.score = new_score
+
+
+def create_favorite(user, location):
+    """Add a favorite location to a user."""
+
+    favorite = Favorite(
+                        user=user,
+                        location=location
+                        )
+
+    return favorite
 
 
 def get_users():
@@ -91,10 +116,11 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-# def update_rating(rating_id, new_score):
-#     """ Update a rating given rating_id and the updated score. """
-#     rating = Rating.query.get(rating_id)
-#     rating.score = new_score
+def get_favs_by_user(user_id):
+    """Return favorite locations of a user"""
+
+    return Favorite.query.filter(User.user_id == user_id).all()
+
 
 if __name__ == "__main__":
     from server import app

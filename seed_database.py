@@ -44,10 +44,10 @@ for n in range(10):
     user = crud.create_user(f"fname_{n}", f"lname_{n}", email, password, f"408-000-{n}{n}{n}{n}", datetime.now(), True)
     model.db.session.add(user)
 
-    for _ in range(5):
+    for i in range(5):
         random_location = choice(locations_in_db)
 
-        comment = crud.create_comment(user, random_location, f"comment_{n+1}", datetime.now(), True)
+        comment = crud.create_comment(user, random_location, f"\t comment_{i+1}", datetime.now(), True)
         model.db.session.add(comment)
 
 model.db.session.commit()

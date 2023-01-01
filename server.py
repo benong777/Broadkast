@@ -16,7 +16,18 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     """View homepage."""
 
-    return render_template("homepage.html")
+    welcome_msg = "Welcome"
+
+    # -- Check if there's a user logged in
+    user_email = session.get("user_email")
+
+    if user_email: 
+        user = crud.get_user_by_email(user_email)
+        fname = user.fname
+        welcome_msg += " " + fname
+        # del session["user_email"]
+
+    return render_template("homepage.html", welcome_msg=welcome_msg)
 
 
 @app.route("/login")
@@ -40,7 +51,16 @@ def process_login():
     else:
         # Log in user by storing the user's email in session
         session["user_email"] = user.email
-        flash(f"Welcome back, {user.fname}!")
+        # flash(f"Welcome back, {user.fname}!")
+
+    return redirect("/")
+
+
+@app.route("/logout")
+def process_logout():
+    """Log out user"""
+
+    del session["user_email"]
 
     return redirect("/")
 
@@ -57,7 +77,20 @@ def all_locations():
     """View all locations"""
 
     locations = crud.get_locations()
-    return render_template("all_locations.html", locations=locations)
+
+    user_email = session.get("user_email")
+    user = crud.get_user_by_email(user_email)
+
+    #-------------------------------------------------
+    # -- Temp code 
+    crud.create_favorite(user, locations[0])
+    crud.create_favorite(user, locations[2])
+
+    fav_locations = crud.get_favs_by_user(user.user_id)
+    print(f"\n===== ***** {fav_locations} ***** =====\n")
+    #-------------------------------------------------
+
+    return render_template("all_locations.html", locations=locations, fav_locations=fav_locations)
 
 
 @app.route("/locations/<location_id>")
@@ -108,15 +141,12 @@ def create_rating(location_id):
         user = crud.get_user_by_email(logged_in_email)
         location = crud.get_location_by_id(location_id)
 
-        print(f"***** {logged_in_email}: {user} *****")
+        # if not user:    # Do we need this additional check? user_email in sessions cookie, but user not in database
+        #                 # User was deleted in the database
+        #     print(f"***** User not in database *****")
+        #     print(f"***** {logged_in_email}: {user} *****")
+        #     return redirect("/login")
 
-        if not user:    # Do we need this additional check? user_email in sessions cookie, but user not in database
-                        # User was deleted in the database
-            print(f"***** User not in database *****")
-            print(f"***** {logged_in_email}: {user} *****")
-            return redirect("/login")
-
-        print("***** User FOUND *****")
         rating = crud.create_rating(user, location, int(rating_score), datetime.now(), True)
         db.session.add(rating)
         db.session.commit()
@@ -163,14 +193,25 @@ def show_user(user_id):
     return render_template("user_details.html", user=user)
 
 
-# @app.route("/update_rating", methods=["POST"])
-# def update_rating():
-#     rating_id = request.json["rating_id"]
-#     updated_score = request.json["updated_score"]
-#     crud.update_rating(rating_id, updated_score)
-#     db.session.commit()
+@app.route("/update_comment", methods=["POST"])
+def update_comment():
+    comment_id = request.json["comment_id"]
+    updated_comment = request.json["updated_comment"]
+    crud.update_comment(comment_id, updated_comment)
+    db.session.commit()
 
-#     return "Success"
+    return "Success"
+
+
+@app.route("/update_rating", methods=["POST"])
+def update_rating():
+    rating_id = request.json["rating_id"]
+    updated_score = request.json["updated_score"]
+    crud.update_rating(rating_id, updated_score)
+    db.session.commit()
+
+    return "Success"
+
 
 if __name__ == "__main__":
     connect_to_db(app)

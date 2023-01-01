@@ -21,6 +21,7 @@ class User(db.Model):
 
     comments = db.relationship("Comment", back_populates="user")
     ratings = db.relationship("Rating", back_populates="user")
+    favorites = db.relationship("Favorite", back_populates="user")
 
     def __repr__(self):
         return f"<User user_id={self.user_id} email={self.email}>"
@@ -42,6 +43,7 @@ class Location(db.Model):
 
     comments = db.relationship("Comment", back_populates="location")
     ratings = db.relationship("Rating", back_populates="location")
+    favorites = db.relationship("Favorite", back_populates="location")
 
     def __repr__(self):
         return f"<Location location_id={self.location_id} name={self.name}>"
@@ -63,7 +65,7 @@ class Comment(db.Model):
     location = db.relationship("Location", back_populates="comments")
 
     def __repr__(self):
-        return f"<Comment user={self.user} name={self.location} comment={self.comment}>"
+        return f"<Comment user={self.user} location={self.location} comment={self.comment}>"
 
 
 class Rating(db.Model):
@@ -82,7 +84,23 @@ class Rating(db.Model):
     location = db.relationship("Location", back_populates="ratings")
 
     def __repr__(self):
-        return f"<Rating rating_id={self.rating_id} name={self.rating}>"
+        return f"<Rating rating_id={self.rating_id} rating={self.rating}>"
+
+
+class Favorite(db.Model):
+    """User's favorite location"""
+
+    __tablename__ = "favorites"
+
+    fav_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+    location_id = db.Column(db.Integer, db.ForeignKey("locations.location_id"))
+
+    user = db.relationship("User", back_populates="favorites")
+    location = db.relationship("Location", back_populates="favorites")
+
+    def __repr__(self):
+        return f"<Favorite user={self.user} location={self.location}"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):

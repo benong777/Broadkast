@@ -3,15 +3,37 @@
 {% block title %}{{ user.email }}'s Page{% endblock %}
 
 {% block body %}
+
 <h1>{{ user.email }}</h1>
 <ul>
 {% for comment in user.comments %}
     <li>
-        {{ comment.user.fname }}:
-        <span class=rating_num_{{ comment.comment_id }} >
+        {{ comment.location.name }}:
+        <span class=location_num_{{ comment.comment_id }} >
             {{ comment.comment }}
         </span>
+        {% if session["user_email"] == user.email %}
+        <button class="edit-location-comment" id={{ comment.comment_id }}> Edit comment </button>
+        {% endif %}
     </li>
 {% endfor %}
 </ul>
+
+<ul>
+{% for rating in user.ratings %}
+    <li>
+        {{ rating.location.name }}:
+        <span class=rating_num_{{ rating.rating_id }} >
+            {{ rating.rating }}
+        </span>
+        {% if session["user_email"] == user.email %}
+        <button class="edit-location-rating" id={{ rating.rating_id }}> Edit rating </button>
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+
+<script src="../static/js/updateComment.js"></script>
+<script src="../static/js/updateRating.js"></script>
+
 {% endblock %}

@@ -3,12 +3,23 @@
 
 {% block body %}
   <h1>All Locations</h1>
-
   <ul>
     {% for location in locations %}
       <li>
         <a href="/locations/{{ location.location_id }}">
           {{ location.name }}
+        </a>
+        <i class="bi bi-bookmark"></i>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h1>My Locations</h1>
+  <ul>
+    {% for my_location in fav_locations %}
+      <li>
+        <a href="/locations/{{ my_location.location.location_id }}">
+          {{ my_location.location.name }}
         </a>
       </li>
     {% endfor %}
