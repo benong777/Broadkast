@@ -1,5 +1,6 @@
 """Server for location status app."""
 
+import os
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 from datetime import datetime
@@ -11,11 +12,13 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
+GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_KEY']
 
 @app.route("/")
 def homepage():
     """View homepage."""
 
+    google_api_key = GOOGLE_MAPS_API_KEY
     welcome_msg = "Welcome"
 
     # -- Check if there's a user logged in
@@ -27,7 +30,7 @@ def homepage():
         welcome_msg += " " + fname
         # del session["user_email"]
 
-    return render_template("homepage.html", welcome_msg=welcome_msg)
+    return render_template("homepage.html", welcome_msg=welcome_msg, google_api_key=google_api_key)
 
 
 @app.route("/login")

@@ -1,2 +1,4 @@
 venv
+runx
+secrets.sh
 __pycache__

@@ -9,4 +9,13 @@
     <li><a href="/locations">View all locations</a></li>
     <li><a href="/users">View all users</a></li>
   </ul>
+
+  <section class="map">
+    <div id="map" style="height: 500px; width: 500px;"></div>
+  </section>
+
+  <script src="/static/js/map.js"></script>
+
+  <!-- Google Maps -->
+  <script async src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places&callback=initMap"></script>
 {% endblock %}

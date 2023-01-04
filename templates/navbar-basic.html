@@ -1,0 +1,16 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="/">Name here</a>
+      <div class="collapse navbar-collapse d-flex justify-content-end">
+          <div class="navbar-nav">
+            {% if session.get("user_email") %}
+              <a class="nav-link" href="/logout">Log out</a>
+            {% else %}
+              <a class="nav-link" href="/login">Log In</a>
+            {% endif %}
+          </div>
+      </div>
+  </div>
+</nav>
+
+    
