@@ -12,6 +12,7 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
+os.system("source ./secrets.sh")
 GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_KEY']
 
 @app.route("/")

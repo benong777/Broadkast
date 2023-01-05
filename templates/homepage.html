@@ -2,17 +2,23 @@
 {% block title %}Onsite status{% endblock %}
 
 {% block body %}
-  <h1>{{ welcome_msg }}!</h1>
+  <div class="container-fluid d-flex border-1 border-red">
+    <div class="col-4">
+      <h1>{{ welcome_msg }}!</h1>
 
-  <h2>Navigation</h2>
-  <ul>
-    <li><a href="/locations">View all locations</a></li>
-    <li><a href="/users">View all users</a></li>
-  </ul>
+      <h2>Navigation</h2>
+      <ul>
+        <li><a href="/locations">View all locations</a></li>
+        <li><a href="/users">View all users</a></li>
+      </ul>
+    </div>
 
-  <section class="map">
-    <div id="map" style="height: 500px; width: 500px;"></div>
-  </section>
+    <!-- <div class="col-6"> -->
+      <section class="map col-8">
+        <div id="map" style="height: 500px; width: 100%;"></div>
+      </section>
+    <!-- </div> -->
+  </div>
 
   <script src="/static/js/map.js"></script>
 
