@@ -4,20 +4,23 @@
 {% block body %}
   <div class="container-fluid d-flex border-1 border-red">
     <div class="col-4">
-      <h1>{{ welcome_msg }}!</h1>
+      <!-- <h1>{{ welcome_msg }}!</h1> -->
 
-      <h2>Navigation</h2>
+      {% for item in history %}
+        <a href="/locations/{{ item.location.location_id }}">{{ item.location.name }}</a>
+        <div id="item-{{ item.location_id }}" class="search-results location-address">{{ item.location.addr }}</div>
+      {% endfor %}
+
+      <!-- <h2>Navigation</h2>
       <ul>
         <li><a href="/locations">View all locations</a></li>
         <li><a href="/users">View all users</a></li>
-      </ul>
+      </ul> -->
     </div>
 
-    <!-- <div class="col-6"> -->
-      <section class="map col-8">
-        <div id="map" style="height: 500px; width: 100%;"></div>
-      </section>
-    <!-- </div> -->
+    <section class="map col-8">
+      <div id="map" style="height: 500px; width: 100%;"></div>
+    </section>
   </div>
 
   <script src="/static/js/map.js"></script>
