@@ -91,17 +91,28 @@ function initMap() {
       });
     }  
 
-    //-- Google places autocompletion
+    //-------------------------------------
+    // Google places autocompletion
+    //-------------------------------------
     autocomplete = new google.maps.places.Autocomplete(
       document.getElementById("search"),
       {
         componentRestrictions: {'country': ['us']},
-        fields: ['geometry', 'name'],
+        // fields: ['geometry', 'name', 'formatted_address', 'photos'],
+        fields: ['geometry', 'name', 'formatted_address'],
         types: ['establishment']
       });
 
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
+
+        const formatted_address = place.formatted_address;
+        const name = place.name;
+        const photos = place.photos;
+
+        console.log("Photos: ", photos);
+        console.log("name: ", name);
+        console.log("Address: ", formatted_address);
 
         if (!place.geometry) {
           alert("No location found");
@@ -118,6 +129,14 @@ function initMap() {
           //-- Center map to searched location
           basicMap.setCenter(place.geometry.location);
           basicMap.setZoom(18);
+
+          // Fetch: add new search result to history
+          // Fetch: get history
+          // Update frontend using querySelector
+
+          //-- Add to history in the database
+          const history = document.querySelector('.history');
+
         }
       });
  }
