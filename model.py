@@ -22,6 +22,7 @@ class User(db.Model):
     comments = db.relationship("Comment", back_populates="user")
     ratings = db.relationship("Rating", back_populates="user")
     favorites = db.relationship("Favorite", back_populates="user")
+    history = db.relationship("History", back_populates="user")
 
     def __repr__(self):
         return f"<User user_id={self.user_id} email={self.email}>"
@@ -44,6 +45,7 @@ class Location(db.Model):
     comments = db.relationship("Comment", back_populates="location")
     ratings = db.relationship("Rating", back_populates="location")
     favorites = db.relationship("Favorite", back_populates="location")
+    history = db.relationship("History", back_populates="location")
 
     def __repr__(self):
         return f"<Location location_id={self.location_id} name={self.name}>"
@@ -101,6 +103,22 @@ class Favorite(db.Model):
 
     def __repr__(self):
         return f"<Favorite user={self.user} location={self.location}"
+
+
+class History(db.Model):
+    """User's search history."""
+
+    __tablename__ = "history"
+
+    history_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+    location_id = db.Column(db.Integer, db.ForeignKey("locations.location_id"))
+
+    user = db.relationship("User", back_populates="history")
+    location = db.relationship("Location", back_populates="history")
+
+    def __repr__(self):
+        return f"<History location={self.location} user={self.user}"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///ratings", echo=True):
