@@ -29,9 +29,13 @@ def homepage():
         user = crud.get_user_by_email(user_email)
         fname = user.fname
         welcome_msg += " " + fname
+        history = crud.get_history_by_user(user.user_id)[::-1]
         # del session["user_email"]
 
-    return render_template("homepage.html", welcome_msg=welcome_msg, google_api_key=google_api_key)
+    return render_template("homepage.html",
+                            welcome_msg=welcome_msg,
+                            google_api_key=google_api_key,
+                            history=history)
 
 
 @app.route("/login")
@@ -215,6 +219,16 @@ def update_rating():
     db.session.commit()
 
     return "Success"
+
+
+# @app.route("/add_history", methods=["POST"])
+# def add_history():
+#     rating_id = request.json["rating_id"]
+#     updated_score = request.json["updated_score"]
+#     crud.update_rating(rating_id, updated_score)
+#     db.session.commit()
+
+#     return "Success"
 
 
 if __name__ == "__main__":
