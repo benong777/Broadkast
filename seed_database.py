@@ -50,4 +50,7 @@ for n in range(10):
         comment = crud.create_comment(user, random_location, f"\t comment_{i+1}", datetime.now(), True)
         model.db.session.add(comment)
 
+        item = crud.add_history(user, random_location)
+        model.db.session.add(item)
+
 model.db.session.commit()
