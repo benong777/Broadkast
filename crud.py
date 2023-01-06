@@ -1,7 +1,7 @@
 """CRUD operations."""
 
 from datetime import datetime
-from model import db, User, Location, Comment, Rating, Favorite, connect_to_db
+from model import db, User, Location, Comment, Rating, Favorite, History, connect_to_db
 # from model import db, User, Location, Comment, Rating, connect_to_db
 
 
@@ -38,14 +38,14 @@ def create_location(name, description, addr, long, lat, created_at, active):
 def create_comment(user, location, comment, created_at, active):
     """Create a new comment."""
 
-    new_comment = Comment(
+    comment = Comment(
                         user=user,
                         location=location,
                         comment=comment,
                         created_at=created_at,
                         active=active
                      )
-    return new_comment
+    return comment
 
 
 def update_comment(comment_id, new_comment):
@@ -86,6 +86,17 @@ def create_favorite(user, location):
     return favorite
 
 
+def add_history(user, location):
+    """Add search location result to history."""
+
+    history = History(
+                        user=user,
+                        location=location,
+                     )
+    return history
+
+
+
 def get_users():
     """Return all users."""
 
@@ -120,6 +131,12 @@ def get_favs_by_user(user_id):
     """Return favorite locations of a user"""
 
     return Favorite.query.filter(User.user_id == user_id).all()
+
+
+def get_history_by_user(user_id):
+    """Return user's search history."""
+
+    return History.query.filter(User.user_id == user_id).all()
 
 
 if __name__ == "__main__":
