@@ -1,5 +1,13 @@
 [
   {
+    "name": "Starbucks",
+    "description": "Tennis courts",
+    "addr": "533 Coleman Ave, San Jose, CA 95110, USA",
+    "long": "32.5",
+    "lat": "12.8",
+    "active": "True"
+  },
+  {
     "name": "Backesto Park",
     "description": "Tennis courts",
     "addr": "551 N 13th St, San Jose, CA 95112",
