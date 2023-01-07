@@ -130,13 +130,27 @@ function initMap() {
           basicMap.setCenter(place.geometry.location);
           basicMap.setZoom(18);
 
+          // Check if location exist in DB
+          const queryString = new URLSearchParams({ locationName: place.name }).toString();
+          const url = `/get_location?${queryString}`;
+          console.log(url);
+
+          fetch(url)
+            .then((res) => res.text())
+            .then((data) => {
+              console.log( '++++++++++');
+              console.log(data);
+              // document.querySelector('.location-address').innerHTML = data;
+              console.log( '++++++++++');
+            })
+
           // Fetch: add new search result to history
+
           // Fetch: get history
           // Update frontend using querySelector
 
           //-- Add to history in the database
-          const history = document.querySelector('.history');
-
+          // const history = document.querySelector('.history');
         }
       });
  }
