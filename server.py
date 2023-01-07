@@ -1,7 +1,7 @@
 """Server for location status app."""
 
 import os
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
 from datetime import datetime
 import crud
@@ -24,6 +24,9 @@ def homepage():
 
     # -- Check if there's a user logged in
     user_email = session.get("user_email")
+
+    history = None
+    welcome_msg = 'Hi'
 
     if user_email: 
         user = crud.get_user_by_email(user_email)
@@ -220,6 +223,26 @@ def update_rating():
 
     return "Success"
 
+@app.route("/get_location")
+def get_location():
+    """Get a location."""
+
+    name = request.args.get("locationName")
+    location = crud.get_location_by_name(name)
+    print(f'*********** \n {location}\n ***********')
+
+    #-- If location doesn't exist, add to DB
+    # if not location:              
+    #     crud.create_location(
+    #     )
+
+    # 1. convert object -> dictionary
+    # 2. result = jsonify dictionary
+
+    # return result #/ return 
+    # return jsonify({"success": True})
+    return "Success"
+
 
 # @app.route("/add_history", methods=["POST"])
 # def add_history():
@@ -229,6 +252,26 @@ def update_rating():
 #     db.session.commit()
 
 #     return "Success"
+
+
+# Move to helper.py and import it here
+def is_logged_in():
+    """Return True/False if user is logged in."""
+
+    user_email = session.get("user_email")
+    if user_email:
+        return True
+
+    return False
+
+
+def get_current_user():
+    """Return user based on the email."""
+
+    user_email = session.get("user_email")
+    if user_email:
+        user = crud.get_user_by_email(user_email)
+        return user 
 
 
 if __name__ == "__main__":
