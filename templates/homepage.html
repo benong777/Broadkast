@@ -6,11 +6,18 @@
     <div class="col-4">
       <!-- <h1>{{ welcome_msg }}!</h1> -->
 
-      {% for item in history %}
-        <a href="/locations/{{ item.location.location_id }}">{{ item.location.name }}</a>
-        <div id="item-{{ item.location_id }}" class="search-results location-address">{{ item.location.addr }}</div>
-      {% endfor %}
+      {% if history %}
+        {% for item in history %}
+          <div class="pt-3">
+            <a href="/locations/{{ item.location.location_id }}">
+                 {{ item.location.name }}</a>
+            <div id="item-{{ item.location_id }}"
+                 class="search-results location-address">
+                 {{ item.location.addr }}</div>
+          </div>
+        {% endfor %}
 
+      {% endif %}
       <!-- <h2>Navigation</h2>
       <ul>
         <li><a href="/locations">View all locations</a></li>
