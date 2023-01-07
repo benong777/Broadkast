@@ -121,6 +121,12 @@ def get_location_by_id(location_id):
     return Location.query.get(location_id)
 
 
+def get_location_by_name(name):
+    """Return a location by name."""
+
+    return Location.query.filter(Location.name == name).first()
+
+
 def get_user_by_email(email):
     """Return a user by email."""
 
