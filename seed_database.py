@@ -23,34 +23,36 @@ with open("data/locations.json") as f:
 # to create fake ratings
 locations_in_db = []
 for location in location_data:
-    name, description, addr = (
+    # name, description, addr = (
+    name, addr = (
         location["name"],
-        location["description"],
+        # location["description"],
         location["addr"],
     )
     # release_date = datetime.strptime(movie["release_date"], "%Y-%m-%d")
 
-    db_location = crud.create_location(name, description, addr, 32.4, 16.8, datetime.now(), True)
-    locations_in_db.append(db_location)
+    # db_location = crud.create_location(name, description, addr, 32.4, 16.8, datetime.now(), True)
+    db_location = crud.create_location(name, addr, 32.4, 16.8, datetime.now(), True)
+    locations_in_db.append(db_location) # ??? Do we need this?
 
 model.db.session.add_all(locations_in_db)
 model.db.session.commit()
 
-# Create 10 users; each user will make 10 comments
-for n in range(10):
+# Create users; each user will make n comments
+for n in range(3):
     email = f"user{n+1}@test.com"
     password = "test"
 
     user = crud.create_user(f"fname_{n}", f"lname_{n}", email, password, f"408-000-{n}{n}{n}{n}", datetime.now(), True)
     model.db.session.add(user)
 
-    for i in range(5):
+    for i in range(3):
         random_location = choice(locations_in_db)
 
         comment = crud.create_comment(user, random_location, f"\t comment_{i+1}", datetime.now(), True)
         model.db.session.add(comment)
 
-        item = crud.add_history(user, random_location)
-        model.db.session.add(item)
+        # item = crud.add_history(user, random_location)
+        # model.db.session.add(item)
 
 model.db.session.commit()
