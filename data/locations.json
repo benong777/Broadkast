@@ -1,7 +1,6 @@
 [
   {
     "name": "Starbucks",
-    "description": "Tennis courts",
     "addr": "533 Coleman Ave, San Jose, CA 95110, USA",
     "long": "32.5",
     "lat": "12.8",
@@ -9,7 +8,6 @@
   },
   {
     "name": "Backesto Park",
-    "description": "Tennis courts",
     "addr": "551 N 13th St, San Jose, CA 95112",
     "long": "32.5",
     "lat": "12.8",
@@ -17,7 +15,6 @@
   },
   {
     "name": "Calabazas Park Tennis Courts",
-    "description": "Tennis courts",
     "addr": "6816 Rainbow Dr, San Jose, CA 95129",
     "long": "32.5",
     "lat": "12.8",
@@ -25,7 +22,6 @@
   },
   {
     "name": "Henry Schmidt Tennis Courts",
-    "description": "Tennis courts",
     "addr": "555 Los Padres Blvd, Santa Clara, CA 95050",
     "long": "32.5",
     "lat": "12.8",
@@ -33,7 +29,6 @@
   },
   {
     "name": "Serra Park Tennis Courts",
-    "description": "Tennis courts",
     "addr": "1568 Hollenbeck Ave, Sunnyvale, CA 94087",
     "long": "32.5",
     "lat": "12.8",
