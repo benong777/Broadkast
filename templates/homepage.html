@@ -3,7 +3,7 @@
 
 {% block body %}
   <div class="container-fluid d-flex border-1 border-red">
-    <div class="col-4">
+    <div class="col-4" id="history">
       <!-- <h1>{{ welcome_msg }}!</h1> -->
 
       {% if history %}
@@ -16,7 +16,6 @@
                  {{ item.location.addr }}</div>
           </div>
         {% endfor %}
-
       {% endif %}
       <!-- <h2>Navigation</h2>
       <ul>
