@@ -35,7 +35,7 @@ class Location(db.Model):
 
     location_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.String)
-    description = db.Column(db.Text)
+    # description = db.Column(db.Text)
     addr = db.Column(db.String)
     long = db.Column(db.Float)
     lat  = db.Column(db.Float)
@@ -48,7 +48,7 @@ class Location(db.Model):
     history = db.relationship("History", back_populates="location")
 
     def __repr__(self):
-        return f"<Location location_id={self.location_id} name={self.name}>"
+        return f"<Location location_id={self.location_id} name={self.name} addr={self.addr}>"
 
 
 class Comment(db.Model):
