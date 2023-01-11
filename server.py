@@ -12,7 +12,6 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-os.system("source ./secrets.sh")
 GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_KEY']
 
 @app.route("/")
@@ -30,9 +29,14 @@ def homepage():
 
     if user_email: 
         user = crud.get_user_by_email(user_email)
+        print(f"  ***** {user.user_id} *****")
         fname = user.fname
         welcome_msg += " " + fname
+        # history = crud.get_history_by_user(user.user_id)
         history = crud.get_history_by_user(user.user_id)[::-1]
+        print(f"  ***** {history} *****")
+        # print(f"  ***** {user} *****")
+        # print(f"  ***** {user.user_id} *****")
         # del session["user_email"]
 
     return render_template("homepage.html",
@@ -109,6 +113,9 @@ def show_location(location_id):
     """Show details on a particular location."""
 
     location = crud.get_location_by_id(location_id)
+
+    # Use crud to get comments (sorted by date)
+    # Pass comments to template to display
 
     return render_template("location_details.html", location=location)
 
@@ -228,13 +235,28 @@ def get_location():
     """Get a location."""
 
     name = request.args.get("locationName")
-    location = crud.get_location_by_name(name)
-    print(f'*********** \n {location}\n ***********')
+    addr = request.args.get("locationAddr")
+    print(f"   +++++++++\n {name}\n{addr}\n   +++++++++")
+    location_addr = crud.get_location_by_addr(addr)
+    print(f'   *********** \n {location}\n   ***********')
 
     #-- If location doesn't exist, add to DB
-    # if not location:              
-    #     crud.create_location(
-    #     )
+    if not location_addr:              
+        location = crud.create_location(name, addr, 32.4, 16.8, datetime.now(), True)
+        db.session.add(location)
+        db.session.commit()
+        print(f'   *********** \n Newly CREATED: {location}\n   ***********')
+
+    # history = crud.get_history_by_user(user_id)
+    # if not history:
+        # history = crud.add_history(user, location)
+
+    user = get_current_user()
+
+    if user:
+        history = crud.add_history(user, location)
+        db.session.add(history)
+        db.session.commit()
 
     # 1. convert object -> dictionary
     # 2. result = jsonify dictionary
@@ -266,7 +288,7 @@ def is_logged_in():
 
 
 def get_current_user():
-    """Return user based on the email."""
+    """Return logged in user."""
 
     user_email = session.get("user_email")
     if user_email:
