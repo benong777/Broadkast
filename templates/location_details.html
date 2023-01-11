@@ -5,10 +5,6 @@
 {% block body %}
 <h1>{{ location.name }}</h1>
 
-<p>
-  {{ location.description }}
-</p>
-
 {% if session.get('user_email') %}
   <form action="/locations/{{ location.location_id }}/comments" method="POST">
     <p>Comment<input type="text" name="comment"></p>
