@@ -20,12 +20,13 @@ def create_user(fname, lname, email, password, phone_num, created_at, active):
     return user
 
 
-def create_location(name, description, addr, long, lat, created_at, active):
+# def create_location(name, description, addr, long, lat, created_at, active):
+def create_location(name, addr, long, lat, created_at, active):
     """Create and return a new location."""
 
     location = Location(
                         name=name,
-                        description=description,
+                        # description=description,
                         addr=addr,
                         long=long,
                         lat=lat,
@@ -125,6 +126,12 @@ def get_location_by_name(name):
     """Return a location by name."""
 
     return Location.query.filter(Location.name == name).first()
+
+
+def get_location_by_addr(addr):
+    """Return a location by addr."""
+
+    return Location.query.filter(Location.addr == addr).all()
 
 
 def get_user_by_email(email):
