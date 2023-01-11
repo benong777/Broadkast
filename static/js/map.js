@@ -131,17 +131,27 @@ function initMap() {
           basicMap.setZoom(18);
 
           // Check if location exist in DB
-          const queryString = new URLSearchParams({ locationName: place.name }).toString();
+          const queryString = new URLSearchParams({ locationName: place.name, locationAddr: place.formatted_address }).toString();
           const url = `/get_location?${queryString}`;
           console.log(url);
 
           fetch(url)
             .then((res) => res.text())
             .then((data) => {
-              console.log( '++++++++++');
-              console.log(data);
-              // document.querySelector('.location-address').innerHTML = data;
-              console.log( '++++++++++');
+              console.log(`++++++++ ${data} ++++++++`);
+              target = document.querySelector('#history');
+
+              div_1 = document.createElement("div");
+              div_1.className = "pt-3";
+              a_1 = document.createElement("a");
+              a_1.innerHTML = place.name;
+              a_1.setAttribute("href", "/location/1");
+
+              div_2 = document.createElement("div");
+              div_2.innerHTML = place.formatted_address;
+              div_1.appendChild(a_1);
+              div_1.appendChild(div_2);
+              target.appendChild(div_1);
             })
 
           // Fetch: add new search result to history
