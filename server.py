@@ -113,11 +113,12 @@ def show_location(location_id):
     """Show details on a particular location."""
 
     location = crud.get_location_by_id(location_id)
+    comments = crud.get_comments_by_location(location_id)
 
     # Use crud to get comments (sorted by date)
     # Pass comments to template to display
 
-    return render_template("location_details.html", location=location)
+    return render_template("location_details.html", location=location, comments=comments)
 
 
 @app.route("/locations/<location_id>/comments", methods=["POST"])
@@ -237,31 +238,31 @@ def get_location():
     name = request.args.get("locationName")
     addr = request.args.get("locationAddr")
     print(f"   +++++++++\n {name}\n{addr}\n   +++++++++")
-    location_addr = crud.get_location_by_addr(addr)
+    location = crud.get_location_by_name_and_addr(name, addr)
     print(f'   *********** \n {location}\n   ***********')
 
     #-- If location doesn't exist, add to DB
-    if not location_addr:              
+    if not location:              
         location = crud.create_location(name, addr, 32.4, 16.8, datetime.now(), True)
         db.session.add(location)
         db.session.commit()
         print(f'   *********** \n Newly CREATED: {location}\n   ***********')
 
-    # history = crud.get_history_by_user(user_id)
-    # if not history:
-        # history = crud.add_history(user, location)
-
+    # Check if user is logged in
     user = get_current_user()
-
     if user:
-        history = crud.add_history(user, location)
-        db.session.add(history)
-        db.session.commit()
+        # Check if location is in user's history
+        history = crud.get_history_by_user_and_location(user.user_id, location.location_id)
+        print(f'   *********** \n HISTORY: {history}\n   ***********')
+
+        if not history:
+            print(f'   *********** \n Location NOT in history. Adding... \n   ***********')
+            history = crud.add_history(user.user_id, location.location_id)
+            db.session.add(history)
+            db.session.commit()
 
     # 1. convert object -> dictionary
     # 2. result = jsonify dictionary
-
-    # return result #/ return 
     # return jsonify({"success": True})
     return "Success"
 
