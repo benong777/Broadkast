@@ -87,17 +87,20 @@ def create_favorite(user, location):
     return favorite
 
 
-def add_history(user, location):
+def add_history(user_id, location_id):
     """Add search location result to history."""
 
     history = History(
-                        user=user,
-                        location=location,
+                        user_id=user_id,
+                        location_id=location_id,
                      )
     return history
 
 
 
+#---------------------------------
+# Users
+#---------------------------------
 def get_users():
     """Return all users."""
 
@@ -110,6 +113,15 @@ def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 
+def get_user_by_email(email):
+    """Return a user by email."""
+
+    return User.query.filter(User.email == email).first()
+
+
+#---------------------------------
+# Locations
+#---------------------------------
 def get_locations():
     """Return all locations."""
 
@@ -131,25 +143,55 @@ def get_location_by_name(name):
 def get_location_by_addr(addr):
     """Return a location by addr."""
 
-    return Location.query.filter(Location.addr == addr).all()
+    return Location.query.filter(Location.addr == addr).first()
 
 
-def get_user_by_email(email):
-    """Return a user by email."""
+def get_location_by_name_and_addr(name, addr):
+    """Return a location by name and addr."""
 
-    return User.query.filter(User.email == email).first()
+    return Location.query.filter(Location.name == name, Location.addr == addr).first()
 
 
+
+#---------------------------------
+# Favorites
+#---------------------------------
 def get_favs_by_user(user_id):
     """Return favorite locations of a user"""
 
     return Favorite.query.filter(User.user_id == user_id).all()
 
 
+#---------------------------------
+# History
+#---------------------------------
 def get_history_by_user(user_id):
     """Return user's search history."""
 
-    return History.query.filter(User.user_id == user_id).all()
+    # ??? 
+    # return History.query.filter(History.user_id == user_id).all()
+    return History.query.filter(History.user_id == user_id).all()
+
+
+def get_history_by_location(location_id):
+    """Return location in search history based on location id."""
+
+    return History.query.filter(History.location_id == location_id).all()
+
+
+def get_history_by_user_and_location(user_id, location_id):
+    """Return history item based on user and location id."""
+
+    return History.query.filter(History.user_id == user_id, History.location_id == location_id).first()
+
+#---------------------------------
+# Comments
+#---------------------------------
+def get_comments_by_location(location_id):
+    """Return comments for a location"""
+
+    return Comment.query.filter(Comment.location_id == location_id).order_by(Comment.created_at.desc()).all()
+
 
 
 if __name__ == "__main__":
