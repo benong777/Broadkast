@@ -136,31 +136,26 @@ function initMap() {
           console.log(url);
 
           fetch(url)
-            .then((res) => res.text())
+            .then((res) => res.json())
             .then((data) => {
-              console.log(`++++++++ ${data} ++++++++`);
-              target = document.querySelector('#history');
+              console.log(`++++++++ ${data.location_id} ++++++++`);
+              // target = document.querySelector('#history');
 
-              div_1 = document.createElement("div");
-              div_1.className = "pt-3";
-              a_1 = document.createElement("a");
-              a_1.innerHTML = place.name;
-              a_1.setAttribute("href", "/location/1");
+              // div_1 = document.createElement("div");
+              // div_1.className = "pt-3";
+              // a_1 = document.createElement("a");
+              // a_1.innerHTML = place.name;
+              // a_1.setAttribute("href", "/location/1");
 
-              div_2 = document.createElement("div");
-              div_2.innerHTML = place.formatted_address;
-              div_1.appendChild(a_1);
-              div_1.appendChild(div_2);
-              target.appendChild(div_1);
+              // div_2 = document.createElement("div");
+              // div_2.innerHTML = place.formatted_address;
+              // div_1.appendChild(a_1);
+              // div_1.appendChild(div_2);
+              // target.appendChild(div_1);
+
+              //-- Update route
+              window.location.href = `http://localhost:5000/locations/${data.location_id}`;
             })
-
-          // Fetch: add new search result to history
-
-          // Fetch: get history
-          // Update frontend using querySelector
-
-          //-- Add to history in the database
-          // const history = document.querySelector('.history');
         }
       });
  }
