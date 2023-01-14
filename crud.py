@@ -159,7 +159,7 @@ def get_location_by_name_and_addr(name, addr):
 def get_favs_by_user(user_id):
     """Return favorite locations of a user"""
 
-    return Favorite.query.filter(User.user_id == user_id).all()
+    return Favorite.query.filter(Favorite.user_id == user_id).all()
 
 
 #---------------------------------
