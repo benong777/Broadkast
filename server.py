@@ -86,6 +86,26 @@ def create_account():
 
     return render_template("create_account.html")
 
+@app.route("/favorites")
+def favorites():
+    """View user's favorite locations."""
+
+    user_email = session.get("user_email")
+
+    if user_email:
+        user = crud.get_user_by_email(user_email)
+        location = crud.get_location_by_name("Starbucks")
+
+        #-- Temp
+        crud.create_favorite(user, location)
+        #-- Temp
+
+        favorites = crud.get_favs_by_user(user.user_id)
+        print(f"Favs: {favorites}")
+
+    return render_template("favorites.html", favorites=favorites)
+    # return render_template("all_locations.html", locations=locations, fav_locations=fav_locations)
+
 
 @app.route("/locations")
 def all_locations():
@@ -261,10 +281,17 @@ def get_location():
             db.session.add(history)
             db.session.commit()
 
+    print("**** GET LOCATION DONE *****")
+
     # 1. convert object -> dictionary
     # 2. result = jsonify dictionary
     # return jsonify({"success": True})
-    return "Success"
+    return {
+            "location_id": location.location_id
+            }
+
+    # comments = crud.get_comments_by_location(location.location_id)
+    # return render_template("location_details.html", location=location, comments=comments)
 
 
 # @app.route("/add_history", methods=["POST"])
