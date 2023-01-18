@@ -18,7 +18,6 @@ GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_KEY']
 def homepage():
     """View homepage."""
 
-    google_api_key = GOOGLE_MAPS_API_KEY
     welcome_msg = "Welcome"
 
     # -- Check if there's a user logged in
@@ -41,7 +40,7 @@ def homepage():
 
     return render_template("homepage.html",
                             welcome_msg=welcome_msg,
-                            google_api_key=google_api_key,
+                            google_api_key=GOOGLE_MAPS_API_KEY,
                             history=history)
 
 
@@ -135,10 +134,11 @@ def show_location(location_id):
     location = crud.get_location_by_id(location_id)
     comments = crud.get_comments_by_location(location_id)
 
-    # Use crud to get comments (sorted by date)
-    # Pass comments to template to display
+    if location is None:
+        flash("Location not found. Please enter a new location.")
+        return redirect("/")
 
-    return render_template("location_details.html", location=location, comments=comments)
+    return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY)
 
 
 @app.route("/locations/<location_id>/comments", methods=["POST"])
