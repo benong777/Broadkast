@@ -160,7 +160,7 @@ def create_comment(location_id):
         db.session.add(comment)
         db.session.commit()
 
-        flash(f"Your comment has been submitted: \n{comment.comment}.")
+        # flash(f"Your comment has been submitted: \n{comment.comment}.")
 
     return redirect(f"/locations/{location_id}")
 
