@@ -6,7 +6,7 @@
         <section aria-labelledby="notes-title">
           <div class="bg-white shadow sm:overflow-hidden sm:rounded-lg">
             <div class="divide-y divide-gray-200">
-              <div class="px-4 py-5 sm:px-6">
+              <div class="px-4 py-2 sm:px-6">
                 <h2 id="notes-title" class="text-lg font-medium text-gray-900">Broadcasts</h2>
               </div>
               <div class="px-4 py-6 sm:px-6">
@@ -23,13 +23,13 @@
                             <a href="#" class="font-medium text-gray-900">{{ comment.user.fname }} {{ comment.user.lname }}</a>
                           </div>
                           <div class="mt-1 text-sm text-gray-700">
-                            <p>{{ comment.comment }}</p>
+                            <p id="comment-id-{{ comment.comment_id }}">{{ comment.comment }}</p>
                           </div>
                           <div class="mt-2 space-x-2 text-sm">
                             <!-- <span class="font-medium text-gray-500">4d ago</span> -->
-                            <span class="font-medium text-gray-500">{{ comment.created_at }}</span>
+                            <span class="font-medium text-gray-500">{{ comment.created_at.strftime('%H:%M %m-%d-%Y') }}</span>
                             <span class="font-medium text-gray-500">&middot;</span>
-                            <button type="button" class="font-medium text-gray-900">Edit</button>
+                            <button type="button" id="{{ comment.comment_id }}" class="edit-comment font-medium text-gray-900">Edit</button>
                           </div>
                         </div>
                       </div>
