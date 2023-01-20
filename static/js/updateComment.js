@@ -1,4 +1,4 @@
-editButtons = document.querySelectorAll('.edit-location-comment');
+editButtons = document.querySelectorAll('.edit-comment');
 console.log(editButtons)
 
 for (const button of editButtons) {
@@ -20,7 +20,7 @@ for (const button of editButtons) {
       },
     }).then((response) => {
       if (response.ok) {
-        document.querySelector(`span.location_num_${button.id}`).innerHTML = newComment;
+        document.querySelector(`#comment-id-${button.id}`).innerHTML = newComment;
       } else {
         alert('Failed to update comment.');
       }
