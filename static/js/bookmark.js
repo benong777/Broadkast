@@ -1,21 +1,18 @@
 const btnBookmarks = document.querySelectorAll(".bookmark");
+// console.log('Bookmarks: ', btnBookmarks);
 
 for (const btnBookmark of btnBookmarks) {
+   console.log('Bookmark:', btnBookmark);
+   console.log('Bookmark innerHTML:', btnBookmark.innerHTML);
+   console.log('Bookmark child:', btnBookmark.firstChild);
+
    btnBookmark.addEventListener("click", () => {
       console.log(`${btnBookmark.id} clicked!`);
       const location = {
          locationId: btnBookmark.id
       }
 
-               // const fill = document.querySelector(".bookmark-icon").getAttribute('fill') 
-
-               // if (fill == 'None') {
-               //    document.querySelector(".bookmark-icon").setAttribute('fill', 'blue');
-               // } else {
-               //    document.querySelector(".bookmark-icon").setAttribute('fill', 'None');
-               // }
-
-      //-- Fetch: 
+      //-- Update database bookmark table
       fetch('/add_bookmark', {
          method: 'POST',
          body: JSON.stringify(location),
@@ -25,12 +22,11 @@ for (const btnBookmark of btnBookmarks) {
       })
       .then(res => res.json())
       .then(data => {
-         console.log('*** === Data:', data);
-         console.log(data['is_bookmarked']);
+         //-- Fill color when bookmarked
          if (data['is_bookmarked']) {
-                  document.querySelector(".bookmark-icon").setAttribute('fill', 'blue');
+                  btnBookmark.getElementsByClassName('bookmark-icon')[0].setAttribute('fill', 'blue');
          } else {
-                  document.querySelector(".bookmark-icon").setAttribute('fill', 'None');
+                  btnBookmark.getElementsByClassName('bookmark-icon')[0].setAttribute('fill', 'None');
          }
       });
    });
