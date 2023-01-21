@@ -7,26 +7,31 @@ for (const btnBookmark of btnBookmarks) {
          locationId: btnBookmark.id
       }
 
-               const fill = document.querySelector(".bookmark-icon").getAttribute('fill') 
+               // const fill = document.querySelector(".bookmark-icon").getAttribute('fill') 
 
-               if (fill == 'None') {
-                  document.querySelector(".bookmark-icon").setAttribute('fill', 'blue');
-               } else {
-                  document.querySelector(".bookmark-icon").setAttribute('fill', 'None');
-               }
+               // if (fill == 'None') {
+               //    document.querySelector(".bookmark-icon").setAttribute('fill', 'blue');
+               // } else {
+               //    document.querySelector(".bookmark-icon").setAttribute('fill', 'None');
+               // }
 
       //-- Fetch: 
-      // fetch('/add_bookmark', {
-      //    method: 'POST',
-      //    body: JSON.stringify(location),
-      //    headers: {
-      //      'Content-Type': 'application/json',
-      //    },
-      // }).then((res) => res.json())
-      // }).then(data => {
-      //    if (data == 'Success') {
-      //       // Update DOM   
-      //    }
-      // });
+      fetch('/add_bookmark', {
+         method: 'POST',
+         body: JSON.stringify(location),
+         headers: {
+           'Content-Type': 'application/json',
+         }
+      })
+      .then(res => res.json())
+      .then(data => {
+         console.log('*** === Data:', data);
+         console.log(data['is_bookmarked']);
+         if (data['is_bookmarked']) {
+                  document.querySelector(".bookmark-icon").setAttribute('fill', 'blue');
+         } else {
+                  document.querySelector(".bookmark-icon").setAttribute('fill', 'None');
+         }
+      });
    });
 }
