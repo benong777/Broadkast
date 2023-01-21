@@ -21,7 +21,7 @@ class User(db.Model):
 
     comments = db.relationship("Comment", back_populates="user")
     ratings = db.relationship("Rating", back_populates="user")
-    favorites = db.relationship("Favorite", back_populates="user")
+    bookmarks = db.relationship("Bookmark", back_populates="user")
     history = db.relationship("History", back_populates="user")
 
     def __repr__(self):
@@ -44,7 +44,7 @@ class Location(db.Model):
 
     comments = db.relationship("Comment", back_populates="location")
     ratings = db.relationship("Rating", back_populates="location")
-    favorites = db.relationship("Favorite", back_populates="location")
+    bookmarks = db.relationship("Bookmark", back_populates="location")
     history = db.relationship("History", back_populates="location")
 
     def __repr__(self):
@@ -89,20 +89,20 @@ class Rating(db.Model):
         return f"<Rating rating_id={self.rating_id} rating={self.rating}>"
 
 
-class Favorite(db.Model):
-    """User's favorite location"""
+class Bookmark(db.Model):
+    """User's bookmark location"""
 
-    __tablename__ = "favorites"
+    __tablename__ = "bookmarks"
 
-    fav_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    bookmark_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     location_id = db.Column(db.Integer, db.ForeignKey("locations.location_id"))
 
-    user = db.relationship("User", back_populates="favorites")
-    location = db.relationship("Location", back_populates="favorites")
+    user = db.relationship("User", back_populates="bookmarks")
+    location = db.relationship("Location", back_populates="bookmarks")
 
     def __repr__(self):
-        return f"<Favorite user={self.user} location={self.location}"
+        return f"<Bookmark user={self.user} location={self.location}"
 
 
 class History(db.Model):
