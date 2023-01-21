@@ -85,9 +85,9 @@ def create_account():
 
     return render_template("create_account.html")
 
-@app.route("/favorites")
-def favorites():
-    """View user's favorite locations."""
+@app.route("/bookmarks")
+def bookmarks():
+    """View user's bookmarked locations."""
 
     user_email = session.get("user_email")
 
@@ -96,13 +96,13 @@ def favorites():
         location = crud.get_location_by_name("Starbucks")
 
         #-- Temp
-        crud.create_favorite(user, location)
+        crud.add_bookmark(user.user_id, location.location_id)
         #-- Temp
 
-        favorites = crud.get_favs_by_user(user.user_id)
-        print(f"Favs: {favorites}")
+        bookmarks = crud.get_bookmarks_by_user(user.user_id)
+        print(f"Bookmarks: {bookmarks}")
 
-    return render_template("favorites.html", favorites=favorites)
+    return render_template("bookmarks.html", bookmarks=bookmarks)
     # return render_template("all_locations.html", locations=locations, fav_locations=fav_locations)
 
 
@@ -117,8 +117,8 @@ def all_locations():
 
     #-------------------------------------------------
     # -- Temp code 
-    crud.create_favorite(user, locations[0])
-    crud.create_favorite(user, locations[2])
+    crud.add_bookmarks(user, locations[0])
+    crud.add_bookmarks(user, locations[2])
 
     fav_locations = crud.get_favs_by_user(user.user_id)
     print(f"\n===== ***** {fav_locations} ***** =====\n")
