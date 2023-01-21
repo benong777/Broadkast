@@ -1,7 +1,7 @@
 """CRUD operations."""
 
 from datetime import datetime
-from model import db, User, Location, Comment, Rating, Favorite, History, connect_to_db
+from model import db, User, Location, Comment, Rating, Bookmark, History, connect_to_db
 # from model import db, User, Location, Comment, Rating, connect_to_db
 
 
@@ -76,15 +76,15 @@ def update_rating(rating_id, new_score):
     rating.score = new_score
 
 
-def create_favorite(user, location):
-    """Add a favorite location to a user."""
+def add_bookmark(user_id, location_id):
+    """Add a bookmark location to a user."""
 
-    favorite = Favorite(
-                        user=user,
-                        location=location
+    bookmark = Bookmark(
+                        user_id=user_id,
+                        location_id=location_id
                         )
 
-    return favorite
+    return bookmark
 
 
 def add_history(user_id, location_id):
@@ -154,12 +154,18 @@ def get_location_by_name_and_addr(name, addr):
 
 
 #---------------------------------
-# Favorites
+# Bookmarks
 #---------------------------------
-def get_favs_by_user(user_id):
-    """Return favorite locations of a user"""
+def get_bookmark_by_user(user_id):
+    """Return bookmark locations of a user"""
 
-    return Favorite.query.filter(Favorite.user_id == user_id).all()
+    return Bookmark.query.filter(Bookmark.user_id == user_id).all()
+
+
+def get_bookmark_by_user_and_location(user_id, location_id):
+    """Return bookmark based on user and location id."""
+
+    return Bookmark.query.filter(Bookmark.user_id == user_id, Bookmark.location_id == location_id).first()
 
 
 #---------------------------------
