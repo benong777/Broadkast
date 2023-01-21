@@ -1,8 +1,6 @@
 editButtons = document.querySelectorAll('.edit-comment');
-console.log(editButtons)
 
 for (const button of editButtons) {
-  console.log(button);
   button.addEventListener('click', () => {
     // Prompt for new comment
     const newComment = prompt('Add your new comment here.');
