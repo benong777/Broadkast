@@ -242,6 +242,54 @@ def update_comment():
     return "Success"
 
 
+@app.route("/add_bookmark", methods=["POST"])
+def add_bookmark():
+    # -- Check if there's a user logged in
+    user_email = session.get("user_email")
+
+    if not user_email: 
+        return redirect("/login")
+    else:
+        user = crud.get_user_by_email(user_email)
+        print(f"  ***** {user.user_id} *****")
+
+        location_id = request.json["locationId"]
+        # crud.get_bookmark(user.user_id)
+        # crud.add_bookmark(user.user_id, location_id)
+
+        bookmark = crud.get_bookmark_by_user_and_location(user.user_id, location_id)
+        print(bookmark)
+
+        if bookmark:
+            db.session.delete(bookmark)
+            db.session.commit()
+            is_bookmarked = False
+            print(f"***** ===== FALSE ***** =====")
+        else:
+            bookmark = crud.add_bookmark(user.user_id, location_id)
+            db.session.add(bookmark)
+            db.session.commit()
+            is_bookmarked = True
+            print(f"***** ===== TRUE ***** =====")
+
+        print(f"***** ===== {is_bookmarked} ***** =====")
+
+    # Get value first to determine whether to set / reset
+    #   
+    # Get verification that the crud worked
+    # return "Success"
+    # return  {
+    #             is_bookmarked: is_bookmarked
+    #         }
+    return {
+        'is_bookmarked': is_bookmarked
+        # "is_bookmarked": True
+    }
+    # return {
+    #         "location_id": location.location_id
+    #         }
+
+
 @app.route("/update_rating", methods=["POST"])
 def update_rating():
     rating_id = request.json["rating_id"]
