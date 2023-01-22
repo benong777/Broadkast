@@ -34,14 +34,32 @@ def homepage():
         # history = crud.get_history_by_user(user.user_id)
         history = crud.get_history_by_user(user.user_id)[::-1]
         print(f"  ***** {history} *****")
-        # print(f"  ***** {user} *****")
-        # print(f"  ***** {user.user_id} *****")
+
+        bookmarks = {}
+        if history:
+            for item in history:
+                bookmark = crud.get_bookmark_by_user_and_location(user.user_id, item.location.location_id)
+                if bookmark: 
+                    is_bookmarked = True
+                    bookmarks[item.location.location_id] = is_bookmarked
+                else:
+                    is_bookmarked = False
+                    bookmarks[item.location.location_id] = is_bookmarked
+
+                print(f"***** ===== {item} ===== *****")
+                print(f"***** ===== {bookmark} ===== *****")
+                print(f"***** ===== User_ID: {user.user_id}, Location: {item.location_id} ===== *****")
+                # print(f"***** ===== {is_bookmarked} ===== *****")
+                
+            print(f"***** ===== {history} ===== *****")
+            print(f"***** ===== {bookmarks} ===== *****")
         # del session["user_email"]
 
     return render_template("homepage.html",
                             welcome_msg=welcome_msg,
                             google_api_key=GOOGLE_MAPS_API_KEY,
-                            history=history)
+                            history=history,
+                            bookmarks=bookmarks)
 
 
 @app.route("/login")
@@ -99,7 +117,7 @@ def bookmarks():
         crud.add_bookmark(user.user_id, location.location_id)
         #-- Temp
 
-        bookmarks = crud.get_bookmarks_by_user(user.user_id)
+        bookmarks = crud.get_bookmark_by_user(user.user_id)
         print(f"Bookmarks: {bookmarks}")
 
     return render_template("bookmarks.html", bookmarks=bookmarks)
@@ -283,6 +301,47 @@ def add_bookmark():
     #         }
     return {
         'is_bookmarked': is_bookmarked
+        # "is_bookmarked": True
+    }
+    # return {
+    #         "location_id": location.location_id
+    #         }
+
+
+@app.route("/remove_bookmark", methods=["POST"])
+def remove_bookmark():
+    # -- Check if there's a user logged in
+    user_email = session.get("user_email")
+    result = None
+
+    if not user_email: 
+        return redirect("/login")
+    else:
+        user = crud.get_user_by_email(user_email)
+        print(f"  ***** {user.user_id} *****")
+
+        location_id = request.json["locationId"]
+
+        bookmark = crud.get_bookmark_by_user_and_location(user.user_id, location_id)
+        print(bookmark)
+
+        if bookmark:
+            db.session.delete(bookmark)
+            db.session.commit()
+            result = "Success"
+            print(f"***** ===== Bookmark deleted ***** =====")
+        
+        result = "No record found"
+
+    # Get value first to determine whether to set / reset
+    #   
+    # Get verification that the crud worked
+    # return "Success"
+    # return  {
+    #             is_bookmarked: is_bookmarked
+    #         }
+    return {
+        'result': result
         # "is_bookmarked": True
     }
     # return {
