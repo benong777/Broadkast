@@ -25,6 +25,7 @@ def homepage():
 
     history = None
     welcome_msg = 'Hi'
+    bookmarks = {}
 
     if user_email: 
         user = crud.get_user_by_email(user_email)
@@ -35,7 +36,6 @@ def homepage():
         history = crud.get_history_by_user(user.user_id)[::-1]
         print(f"  ***** {history} *****")
 
-        bookmarks = {}
         if history:
             for item in history:
                 bookmark = crud.get_bookmark_by_user_and_location(user.user_id, item.location.location_id)
@@ -364,7 +364,8 @@ def get_location():
 
     name = request.args.get("locationName")
     addr = request.args.get("locationAddr")
-    print(f"   +++++++++\n {name}\n{addr}\n   +++++++++")
+    geometry = request.args.get("locationGeometry")
+    print(f"   +++++++++\n {name}\n{addr}\n{geometry}   +++++++++")
     location = crud.get_location_by_name_and_addr(name, addr)
     print(f'   *********** \n {location}\n   ***********')
 
