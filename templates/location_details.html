@@ -3,8 +3,8 @@
 {% block title %}{{ location.name }} - Details{% endblock %}
 
 {% block body %}
-  <!-- <div id="test" data-lat="37.3304293" data-lng="-121.8601749">{{ location.name }},  {{ location.lat }}, {{ location.lng }}</div> -->
-  <div id="test" data-lat="{{ location.lat }}" data-lng="{{ location.lng }}">{{ location.name }},  {{ location.lat }}, {{ location.lng }}</div>
+  <!-- <div id="test" class="hidden" data-lat="{{ location.lat }}" data-lng="{{ location.lng }}">{{ location.name }},  {{ location.lat }}, {{ location.lng }}</div> -->
+  <div id="test" class="hidden" data-lat="{{ location.lat }}" data-lng="{{ location.lng }}"></div>
   {% include 'comments.html' %}
 
   <script>
