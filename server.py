@@ -364,14 +364,18 @@ def get_location():
 
     name = request.args.get("locationName")
     addr = request.args.get("locationAddr")
-    geometry = request.args.get("locationGeometry")
-    print(f"   +++++++++\n {name}\n{addr}\n{geometry}   +++++++++")
+    lat = request.args.get("locationLat")
+    lng = request.args.get("locationLng")
+    # geometry = request.args.get("locationGeometry")
+    # print(f"   +++++++++\n {name}\n{addr}\n{geometry}   +++++++++")
+    print(f"   +++++++++\n {name}\n{addr}\n{lat}\t{lng}   +++++++++")
     location = crud.get_location_by_name_and_addr(name, addr)
     print(f'   *********** \n {location}\n   ***********')
 
     #-- If location doesn't exist, add to DB
     if not location:              
-        location = crud.create_location(name, addr, 32.4, 16.8, datetime.now(), True)
+        # location = crud.create_location(name, addr, geometry, 32.4, 16.8, datetime.now(), True)
+        location = crud.create_location(name, addr, lat, lng, datetime.now(), True)
         db.session.add(location)
         db.session.commit()
         print(f'   *********** \n Newly CREATED: {location}\n   ***********')
