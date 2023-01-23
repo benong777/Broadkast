@@ -20,15 +20,15 @@ def create_user(fname, lname, email, password, phone_num, created_at, active):
     return user
 
 
-# def create_location(name, description, addr, long, lat, created_at, active):
-def create_location(name, addr, long, lat, created_at, active):
+# def create_location(name, description, addr, lat, lng, created_at, active):
+def create_location(name, addr, lat, lng, created_at, active):
     """Create and return a new location."""
 
     location = Location(
                         name=name,
                         # description=description,
                         addr=addr,
-                        long=long,
+                        lng=lng,
                         lat=lat,
                         created_at=created_at,
                         active=active
