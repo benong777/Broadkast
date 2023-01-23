@@ -4,7 +4,13 @@
 
 {% block body %}
   <!-- <div id="test" class="hidden" data-lat="{{ location.lat }}" data-lng="{{ location.lng }}">{{ location.name }},  {{ location.lat }}, {{ location.lng }}</div> -->
-  <div id="test" class="hidden" data-lat="{{ location.lat }}" data-lng="{{ location.lng }}"></div>
+  <div id="location-vars" class="hidden"
+    data-name="{{ location.name }}"
+    data-addr="{{ location.addr }}"
+    data-lat="{{ location.lat }}"
+    data-lng="{{ location.lng }}">
+  </div>
+
   {% include 'comments.html' %}
 
   <script>
