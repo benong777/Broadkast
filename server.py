@@ -153,7 +153,7 @@ def show_location(location_id):
     comments = crud.get_comments_by_location(location_id)
 
     if location is None:
-        flash("Location not found. Please enter a new location.")
+        # flash("Location not found. Please enter a new location.")
         return redirect("/")
 
     return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY)
