@@ -133,7 +133,7 @@ function initMap() {
           basicMap.setZoom(18);
 
           // Check if location exist in DB
-          const queryString = new URLSearchParams({ locationName: place.name, locationGeometry: place.geometry.location, locationAddr: place.formatted_address }).toString();
+          const queryString = new URLSearchParams({ locationName: place.name, locationLat: place.geometry.location.lat(), locationLng: place.geometry.location.lng(), locationAddr: place.formatted_address }).toString();
           const url = `/get_location?${queryString}`;
           console.log(url);
 
@@ -156,8 +156,8 @@ function initMap() {
               // target.appendChild(div_1);
 
               //-- Update route
-              // window.location.href = `http://localhost:5000/locations/${data.location_id}`;
-              window.location.replace(`http://localhost:5000/locations/${data.location_id}`);
+              window.location.href = `http://localhost:5000/locations/${data.location_id}`;
+              // window.location.replace(`http://localhost:5000/locations/${data.location_id}`);
             })
         }
       });
