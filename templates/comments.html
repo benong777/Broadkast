@@ -1,9 +1,29 @@
 <div class="min-h-full">
     <div class="mx-auto mt-4 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-      <div class="space-y-6 lg:col-span-2 lg:col-start-1">
+      <!-- <div class="space-y-6 lg:col-span-2 lg:col-start-1"> -->
+
+      <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
+        <div class="bg-white px-4 py-3 shadow sm:rounded-lg sm:px-6">
+          <h2 id="timeline-title" class="text-lg font-medium text-gray-900">{{ location.name }}</h2>
+          <h2 id="timeline-title" class="pb-3 text-md font-medium text-gray-900">{{ location.addr }}</h2>
+
+          <!-- Map -->
+          <div id="map-location" style="height: 300px; width: 100%;"></div>
+
+          <!-- Heroicon name: mini/user -->
+          <!-- <div>
+            <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
+              <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
+              </svg>
+            </span>
+          </div> -->
+        </div>
+      </section>
 
         <!-- Comments-->
-        <section aria-labelledby="notes-title">
+        <!-- <section aria-labelledby="notes-title"> -->
+        <section aria-labelledby="notes-title" class="lg:col-span-2 lg:col-start-1">
           <div class="bg-white shadow sm:overflow-hidden sm:rounded-lg">
             <div class="divide-y divide-gray-200">
               <div class="px-4 py-2 sm:px-6">
@@ -65,25 +85,7 @@
             </div>
           </div>
         </section>
-      </div>
+      <!-- </div> -->
 
-      <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
-        <div class="bg-white px-4 py-3 shadow sm:rounded-lg sm:px-6">
-          <h2 id="timeline-title" class="text-lg font-medium text-gray-900">{{ location.name }}</h2>
-          <h2 id="timeline-title" class="pb-3 text-md font-medium text-gray-900">{{ location.addr }}</h2>
-
-          <!-- Map -->
-          <div id="map-location" style="height: 300px; width: 100%;"></div>
-
-          <!-- Heroicon name: mini/user -->
-          <!-- <div>
-            <span class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
-              <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z" />
-              </svg>
-            </span>
-          </div> -->
-        </div>
-      </section>
     </div>
 </div>
