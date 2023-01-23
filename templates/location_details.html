@@ -3,23 +3,26 @@
 {% block title %}{{ location.name }} - Details{% endblock %}
 
 {% block body %}
-  <div>{{ location.name }},  {{ location.lat }}, {{ location.long }}</div>
+  <!-- <div id="test" data-lat="37.3304293" data-lng="-121.8601749">{{ location.name }},  {{ location.lat }}, {{ location.lng }}</div> -->
+  <div id="test" data-lat="{{ location.lat }}" data-lng="{{ location.lng }}">{{ location.name }},  {{ location.lat }}, {{ location.lng }}</div>
   {% include 'comments.html' %}
 
   <script>
     const locationAddr = "{{ location.addr }}";
-    // const locationLong = parseFloat("{{ location.long }}");
-    // const locationLat  = parseFloat("{{ location.lat  }}");
-    const locationLat  = parseFloat("{{ 150.3984 }}");
-    const locationLong = parseFloat("{{ -221.9752 }}");
+    // const locationLong = location.long;
+    // const locationLat  = location.lat;
+    const locationLng = parseFloat("{{ location.lng }}");
+    const locationLat  = parseFloat("{{ location.lat  }}");
+    // const locationLat  = parseFloat("{{ 150.3984 }}");
+    // const locationLng = parseFloat("{{ -221.9752 }}");
   </script>
 
+  <script src="/static/js/updateComment.js"></script>
   <script src="/static/js/mapLocation.js">
     // locationAddr = "{{ location.addr }}";
-    // locationLong = "{{ location.long }}";
+    // locationLong = "{{ location.lng }}";
     // locationLat  = "{{ location.lat  }}";
   </script>
-  <script src="/static/js/updateComment.js"></script>
 
   <!-- Google Maps -->
   <script async src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places&callback=initMapLocation"></script>
