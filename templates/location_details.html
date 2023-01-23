@@ -3,44 +3,24 @@
 {% block title %}{{ location.name }} - Details{% endblock %}
 
 {% block body %}
+  <div>{{ location.name }},  {{ location.lat }}, {{ location.long }}</div>
   {% include 'comments.html' %}
 
-  <!-- <h1>{{ location.name }}</h1>
-
-  <h1 class="mt-4">Comments</h1>
-  {% for comment in comments %}
-    <p class="pt-2">{{ comment.user.fname }}:  {{ comment.comment }} {{ comment.created_at }}</p>
-  {% endfor %} -->
-
-  <!-- {% if session.get('user_email') %}
-    <form action="/locations/{{ location.location_id }}/comments" method="POST">
-      <p class="mt-4">Comment<input type="text" name="comment"></p>
-      <p><input type="submit"></p>
-    </form>
-
-    <h2>Rate this location</h2>
-    <form action="/locations/{{ location.location_id }}/ratings" method="POST">
-      <p class="mt-4">
-        Rating:
-        <select name="rating">
-          <option value="">Select rating</option>
-          {% for num in range(6) %}
-            <option value="{{ num }}">{{ num }}</option>
-          {% endfor %}
-        </select>
-      </p>
-      <p><input type="submit"></p>
-    </form>
-  {% endif %} -->
-
-
   <script>
-    const locationAddr="{{ location.addr }}";
+    const locationAddr = "{{ location.addr }}";
+    // const locationLong = parseFloat("{{ location.long }}");
+    // const locationLat  = parseFloat("{{ location.lat  }}");
+    const locationLat  = parseFloat("{{ 150.3984 }}");
+    const locationLong = parseFloat("{{ -221.9752 }}");
   </script>
 
-  <script src="/static/js/map.js"></script>
+  <script src="/static/js/mapLocation.js">
+    // locationAddr = "{{ location.addr }}";
+    // locationLong = "{{ location.long }}";
+    // locationLat  = "{{ location.lat  }}";
+  </script>
   <script src="/static/js/updateComment.js"></script>
 
   <!-- Google Maps -->
-  <script async src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places&callback=initMap"></script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places&callback=initMapLocation"></script>
 {% endblock %}
