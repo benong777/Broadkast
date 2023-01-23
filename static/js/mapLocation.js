@@ -3,18 +3,16 @@
 //                  - https://www.youtube.com/watch?v=oVr6unKZbg4
 
 function initMapLocation() {
-    const lat = document.getElementById("test").getAttribute("data-lat");
-    const lng = document.getElementById("test").getAttribute("data-lng");
-    // console.log('LONG:', typeof(locationLat));
-    // console.log('LAT:', locationLng);
-    console.log('LAT:', parseFloat(lat));
-    console.log('LAT:', parseFloat(lng));
+    const currentName = document.getElementById("location-vars").getAttribute("data-name");
+    const currentAddr = document.getElementById("location-vars").getAttribute("data-addr");
+    const currentLat = document.getElementById("location-vars").getAttribute("data-lat");
+    const currentLng = document.getElementById("location-vars").getAttribute("data-lng");
 
     const currentLocation = {
       // lat: locationLat,
       // lng: locationLng,
-      lat: parseFloat(lat),
-      lng: parseFloat(lng),
+      lat: parseFloat(currentLat),
+      lng: parseFloat(currentLng),
       // lat: 37.3304293,
       // lng: -121.8601749,
     };
@@ -27,8 +25,6 @@ function initMapLocation() {
     }
 
    const sfBayCoords = {
-      // lat: 37.3984,
-      // lng: -121.9752,
       lat: 37.3984,
       lng: -121.9752,
     };
@@ -38,7 +34,7 @@ function initMapLocation() {
     const sfMarker = new google.maps.Marker({
       // position: sfBayCoords,
       position: currentLocation,
-      title: 'SF Bay',
+      title: currentName,
       map: basicMap,
     });
   
@@ -47,33 +43,34 @@ function initMapLocation() {
     });
   
     const sfInfo = new google.maps.InfoWindow({
-      content: '<h1>San Francisco Bay!</h1>',
+      content: `<h1>${currentName}</h1>
+                <h2>${currentAddr}</h2>`,
     });
   
     sfInfo.open(basicMap, sfMarker);
   
     const locations = [
-      {
-        name: 'Hackbright Academy',
-        coords: {
-          lat: 37.7887459,
-          lng: -122.4115852,
-        },
-      },
-      {
-        name: 'Powell Street Station',
-        coords: {
-          lat: 37.7844605,
-          lng: -122.4079702,
-        },
-      },
-      {
-        name: 'Montgomery Station',
-        coords: {
-          lat: 37.7894094,
-          lng: -122.4013037,
-        },
-      },
+      // {
+      //   name: 'Hackbright Academy',
+      //   coords: {
+      //     lat: 37.7887459,
+      //     lng: -122.4115852,
+      //   },
+      // },
+      // {
+      //   name: 'Powell Street Station',
+      //   coords: {
+      //     lat: 37.7844605,
+      //     lng: -122.4079702,
+      //   },
+      // },
+      // {
+      //   name: 'Montgomery Station',
+      //   coords: {
+      //     lat: 37.7894094,
+      //     lng: -122.4013037,
+      //   },
+      // },
     ];
   
     const markers = [];
