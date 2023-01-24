@@ -1,37 +1,23 @@
 [
   {
-    "name": "Starbucks",
-    "addr": "533 Coleman Ave, San Jose, CA 95110, USA",
-    "long": "32.5",
-    "lat": "12.8",
+    "name": "Golden Gate Bakery",
+    "addr": "1029 Grant Ave, San Francisco, CA 94133, USA",
+    "lat": "37.7964028",
+    "lng": "-122.4068806",
     "active": "True"
   },
   {
-    "name": "Backesto Park",
-    "addr": "551 N 13th St, San Jose, CA 95112",
-    "long": "32.5",
-    "lat": "12.8",
+    "name": "Northstar California Resort",
+    "addr": "5001 Northstar Dr, Truckee, CA 96161, USA",
+    "lat": "39.27456779999999",
+    "lng": "-120.1210934",
     "active": "True"
   },
   {
-    "name": "Calabazas Park Tennis Courts",
-    "addr": "6816 Rainbow Dr, San Jose, CA 95129",
-    "long": "32.5",
-    "lat": "12.8",
-    "active": "True"
-  },
-  {
-    "name": "Henry Schmidt Tennis Courts",
-    "addr": "555 Los Padres Blvd, Santa Clara, CA 95050",
-    "long": "32.5",
-    "lat": "12.8",
-    "active": "True"
-  },
-  {
-    "name": "Serra Park Tennis Courts",
-    "addr": "1568 Hollenbeck Ave, Sunnyvale, CA 94087",
-    "long": "32.5",
-    "lat": "12.8",
+    "name": "The Boiling Crab",
+    "addr": "71 Curtner Ave Suite 20, San Jose, CA 95125, USA",
+    "lat": "37.3026313",
+    "lng": "-121.864222",
     "active": "True"
   }
 ]
