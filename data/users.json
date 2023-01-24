@@ -1,0 +1,16 @@
+[
+  {
+    "fname": "Ben",
+    "lname": "Doe",
+    "email": "user1@test.com",
+    "password": "test",
+    "phone_num": "408-000-0000"
+  },
+  {
+    "fname": "Vicky",
+    "lname": "Tanner",
+    "email": "user2@test.com",
+    "password": "test",
+    "phone_num": "408-111-1111"
+  }
+]
