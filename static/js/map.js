@@ -4,18 +4,18 @@
 
 function initMap() {
    const sfBayCoords = {
-      lat: 37.601773,
-      lng: -122.20287,
+      lat: 36.5549584,
+      lng: -121.9305959,
     };
     
     const basicMap = new google.maps.Map(document.querySelector('#map'), {
       center: sfBayCoords,
-      zoom: 11,
+      zoom: 16,
     });
 
     const sfMarker = new google.maps.Marker({
       position: sfBayCoords,
-      title: 'SF Bay',
+      title: 'Carmel Sunset Beach',
       map: basicMap,
     });
   
@@ -24,33 +24,33 @@ function initMap() {
     });
   
     const sfInfo = new google.maps.InfoWindow({
-      content: '<h1>San Francisco Bay!</h1>',
+      content: '<h1>Carmel Sunset Beach</h1>',
     });
   
     sfInfo.open(basicMap, sfMarker);
   
     const locations = [
-      {
-        name: 'Hackbright Academy',
-        coords: {
-          lat: 37.7887459,
-          lng: -122.4115852,
-        },
-      },
-      {
-        name: 'Powell Street Station',
-        coords: {
-          lat: 37.7844605,
-          lng: -122.4079702,
-        },
-      },
-      {
-        name: 'Montgomery Station',
-        coords: {
-          lat: 37.7894094,
-          lng: -122.4013037,
-        },
-      },
+      // {
+      //   name: 'Hackbright Academy',
+      //   coords: {
+      //     lat: 37.7887459,
+      //     lng: -122.4115852,
+      //   },
+      // },
+      // {
+      //   name: 'Powell Street Station',
+      //   coords: {
+      //     lat: 37.7844605,
+      //     lng: -122.4079702,
+      //   },
+      // },
+      // {
+      //   name: 'Montgomery Station',
+      //   coords: {
+      //     lat: 37.7894094,
+      //     lng: -122.4013037,
+      //   },
+      // },
     ];
   
     const markers = [];
