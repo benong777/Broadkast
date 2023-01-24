@@ -37,8 +37,8 @@ class Location(db.Model):
     name = db.Column(db.String)
     # description = db.Column(db.Text)
     addr = db.Column(db.String)
-    lng = db.Column(db.Float)
     lat  = db.Column(db.Float)
+    lng = db.Column(db.Float)
     created_at = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
 
