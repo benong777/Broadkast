@@ -114,7 +114,7 @@ def bookmarks():
         location = crud.get_location_by_name("Starbucks")
 
         #-- Temp
-        crud.add_bookmark(user.user_id, location.location_id)
+        # crud.add_bookmark(user.user_id, location.location_id)
         #-- Temp
 
         bookmarks = crud.get_bookmark_by_user(user.user_id)
