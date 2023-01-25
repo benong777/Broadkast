@@ -1,32 +1,33 @@
-const btnBookmarks = document.querySelectorAll(".bookmark");
+function removeBookmark(locationId) {
+   console.log('REMOVE:', locationId);
+   console.log('Type:', typeof(locationId));
 
-for (const btnBookmark of btnBookmarks) {
-   btnBookmark.addEventListener("click", () => {
-      const location = {
-         locationId: btnBookmark.id
+   const location = {
+      locationId: locationId
+   };
+
+   //-- Get bookmark state from DB and set icon color
+   fetch('/remove_bookmark', {
+      method: 'POST',
+      body: JSON.stringify(location),
+      headers: {
+        'Content-Type': 'application/json',
       }
-
-      //-- Fill color when bookmark icon clicked
-      // bookmarkItems = document.querySelectorAll(".bookmark-item");
-      // console.log('Bookmark items:', bookmarkItems);
-      // btnBookmark.remove();
-
-      //-- Get bookmark state from DB and set icon color
-      fetch('/remove_bookmark', {
-         method: 'POST',
-         body: JSON.stringify(location),
-         headers: {
-           'Content-Type': 'application/json',
-         }
-      })
-      .then(res => res.json())
-      .then(data => {
-         //-- Fill color when bookmark icon clicked
-         // if (data === 'Success') {
-            window.location.replace('/bookmarks')
-            // window.location.reload()
-            // window.location.href('/bookmarks.html')
-         // } 
-      });
+   })
+   .then(res => res.json())
+   .then(data => {
+      console.log("DATA: ", data);
+      //-- If fetch is successful, update page
+      if (data['result'] === 'Success') {
+         console.log("SUCCESS!");
+         // window.location.replace('/bookmarks');
+         window.location.href = '/bookmarks';
+      } 
    });
-}
+};
+
+// function test(locationId) {
+//    // window.location.href = `/locations/${locationId}`;
+//          window.location.replace(`/locations/${locationId}`);
+//    console.log('Success!');
+// }
