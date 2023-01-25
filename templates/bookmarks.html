@@ -2,6 +2,30 @@
 {% block title %}Bookmarks{% endblock %}
 
 {% block body %}
+  <div class="mx-16 my-4">
+    <div class="content-center ml-2 mb-3">
+      <h2 class="text-lg font-medium text-gray-600">My bookmarks</h2>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      {% for bookmark in bookmarks %}
+        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+          <div class="min-w-0 flex-1">
+            <button class="bookmark z-10 absolute top-3 right-3" onclick="removeBookmark({{bookmark.location.location_id}})" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bookmark-icon w-7 h-7">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+              </svg>
+            </button>
+            <a href="/locations/{{ bookmark.location.location_id }}" class="focus:outline-none">
+              <span class="absolute inset-0" aria-hidden="true"></span>
+              <p class="text-md font-medium text-gray-900">{{ bookmark.location.name }}</p>
+              <p class="truncate text-sm text-gray-500">{{ bookmark.location.addr }}</p>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
   <!-- <h1>My Bookmarks</h1> -->
   <!-- <ul>
     {% for bookmark in bookmarks %}
@@ -17,159 +41,6 @@
       </li>
     {% endfor %}
   </ul> -->
-
-
-<div class="mx-16 my-4">
-  <div class="content-center ml-2 mb-3">
-    <h2 class="text-lg font-medium text-gray-600">My bookmarks</h2>
-  </div>
-
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-    {% for bookmark in bookmarks %}
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="min-w-0 flex-1">
-        <button class="bookmark z-10 absolute top-3 right-3" onclick="removeBookmark({{bookmark.location.location_id}})" type="button">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bookmark-icon w-7 h-7">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-          </svg>
-        </button>
-        <a href="/locations/{{ bookmark.location.location_id }}" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-md font-medium text-gray-900">{{ bookmark.location.name }}</p>
-          <p class="truncate text-sm text-gray-500">{{ bookmark.location.addr }}</p>
-        </a>
-      </div>
-      <!-- <button class="bookmark z-10" onclick="removeBookmark({{bookmark.location.location_id}})" type="button">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bookmark-icon w-7 h-7">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-        </svg>
-      </button> -->
-    </div>
-    {% endfor %}
-  
-    <!-- <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div>
-    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-      <div class="flex-shrink-0">
-        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-      </div>
-      <div class="min-w-0 flex-1">
-        <a href="#" class="focus:outline-none">
-          <span class="absolute inset-0" aria-hidden="true"></span>
-          <p class="text-sm font-medium text-gray-900">Leslie Alexander</p>
-          <p class="truncate text-sm text-gray-500">Co-Founder / CEO</p>
-        </a>
-      </div>
-    </div> -->
-  </div>
-</div>
 
 <script src="/static/js/removeBookmark.js"></script>
 {% endblock %}
