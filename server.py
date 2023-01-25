@@ -321,6 +321,7 @@ def remove_bookmark():
         print(f"  ***** {user.user_id} *****")
 
         location_id = request.json["locationId"]
+        print(f"{location_id}");
 
         bookmark = crud.get_bookmark_by_user_and_location(user.user_id, location_id)
         print(bookmark)
@@ -330,23 +331,12 @@ def remove_bookmark():
             db.session.commit()
             result = "Success"
             print(f"***** ===== Bookmark deleted ***** =====")
-        
-        result = "No record found"
+        else:
+            result = "No record found"
 
-    # Get value first to determine whether to set / reset
-    #   
-    # Get verification that the crud worked
-    # return "Success"
-    # return  {
-    #             is_bookmarked: is_bookmarked
-    #         }
     return {
         'result': result
-        # "is_bookmarked": True
     }
-    # return {
-    #         "location_id": location.location_id
-    #         }
 
 
 @app.route("/update_rating", methods=["POST"])
