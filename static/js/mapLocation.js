@@ -21,7 +21,7 @@ function initMapLocation() {
 
     const options = {
       center: currentLocation,
-      zoom: 9
+      zoom: 12
     }
 
    const sfBayCoords = {
@@ -154,7 +154,7 @@ function initMapLocation() {
 
           //-- Center map to searched location
           basicMap.setCenter(place.geometry.location);
-          basicMap.setZoom(18);
+          basicMap.setZoom(8);
 
           // Check if location exist in DB
           // const queryString = new URLSearchParams({ locationName: place.name, locationGeometry: place.geometry.location, locationAddr: place.formatted_address }).toString();
