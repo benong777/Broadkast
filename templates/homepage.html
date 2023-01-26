@@ -3,29 +3,37 @@
 
 {% block body %}
 
-<div class="container-fluid g-0">
-  <div class="row g-0">
-    <div class="col-3 g-0">
+<div class="">
+  <div class="grid grid-cols-1 lg:grid-cols-4 lg:grid-flow-col-dense">
+    <div class="lg:col-span-3 lg:col-start-2">
+      <div id="map" style="height: 1050px;"></div>
+    </div>
+    <div class="lg:col-span-1 lg:col-start-1">
+        <div class="border-b border-t border-gray-200 pl-2 pr-6 py-2 sm:pl-6 lg:pl-3 xl:border-t-0 xl:pl-3 xl:pt-4">
+          <div class="flex items-center">
+            <h1 class="flex-1 text-lg font-medium">My Searches</h1>
+          </div>
+        </div>
         <ul role="list" class="divide-y divide-gray-200 border-b border-gray-200">
 
         {% if history %}
           {% for item in history %}
             <li class="relative py-2 pl-2 pr-2 hover:bg-gray-50 sm:py-4 sm:pl-2 lg:pl-2 xl:pl-2">
               <div class="flex items-center justify-between space-x-4">
-                <div class="min-w-0 space-y-3">
+                <div class="min-w-0 space-y-1">
                   <div class="flex items-center space-x-3">
-                    <h2 class="text-md font-medium">
+                    <h2 class="ml-1 mt-2 text-md font-medium">
                       <a href="/locations/{{ item.location.location_id }}">
                         <span class="absolute inset-0" aria-hidden="true"></span>
                         {{ item.location.name }}<span class="sr-only">{{ item.location.name }}</span>
                       </a>
                     </h2>
                   </div>
-                  <div id="item-{{ item.location_id }}" class="group search-results location-address relative flex items-center space-x-2.5">
+                  <div id="item-{{ item.location_id }}" class="group search-results location-address relative ml-1 flex items-center space-x-2.5">
                     <span class="truncate text-sm font-medium text-gray-500 group-hover:text-gray-900">{{ item.location.addr }}</span>
                   </div>
 
-                <div class="hidden flex-shrink-0 flex-col items-end space-y-3 sm:flex">
+                <div class="flex-shrink-0 flex-col items-end space-y-3 sm:flex">
                   <p class="flex items-center space-x-4">
                     <button type="button"
                             id="{{ item.location.location_id }}"
@@ -50,9 +58,9 @@
 
         </ul>
     </div>
-    <div class="col-9">
+    <!-- <div class="sm:col-span-1 sm:col-start-1 lg:col-span-3 lg:col-start-2">
       <div id="map" style="height: 1050px;"></div>
-    </div>
+    </div> -->
   </div>
 </div>
 
