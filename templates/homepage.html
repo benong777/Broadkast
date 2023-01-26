@@ -2,31 +2,19 @@
 {% block title %} Broadcast {% endblock %}
 
 {% block body %}
-<!-- Background color split screen for large screens -->
-<!-- <div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
-<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true"></div> -->
-<div class="relative flex min-h-full flex-col">
 
-  <!-- 3 column wrapper -->
-  <div class="w-full max-w-7xl flex-grow lg:flex">
-    <!-- Left sidebar & main wrapper -->
-    <div class="min-w-0 flex-1 bg-white xl:flex">
-
-      <div class="bg-white lg:min-w-0 lg:flex-1">
-        <div class="border-b border-t border-gray-200 pl-4 pr-6 pt-4 pb-4 sm:pl-6 lg:pl-8 xl:border-t-0 xl:pl-6 xl:pt-6">
-          <div class="flex items-center">
-            <h1 class="flex-1 text-lg font-medium">My Searches</h1>
-          </div>
-        </div>
+<div class="container g-0">
+  <div class="row g-0">
+    <div class="col-3">
         <ul role="list" class="divide-y divide-gray-200 border-b border-gray-200">
 
         {% if history %}
           {% for item in history %}
-            <li class="relative py-5 pl-4 pr-6 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6">
+            <li class="relative py-2 pl-2 pr-2 hover:bg-gray-50 sm:py-4 sm:pl-2 lg:pl-2 xl:pl-2">
               <div class="flex items-center justify-between space-x-4">
                 <div class="min-w-0 space-y-3">
                   <div class="flex items-center space-x-3">
-                    <h2 class="text-sm font-medium">
+                    <h2 class="text-md font-medium">
                       <a href="/locations/{{ item.location.location_id }}">
                         <span class="absolute inset-0" aria-hidden="true"></span>
                         {{ item.location.name }}<span class="sr-only">{{ item.location.name }}</span>
@@ -41,7 +29,7 @@
                   <p class="flex items-center space-x-4">
                     <button type="button"
                             id="{{ item.location.location_id }}"
-                            class="bookmark absolute top-8 right-8 rounded-full bg-white focus:outline-none">
+                            class="bookmark absolute top-2 right-2 rounded-full bg-white focus:outline-none">
                       <span class="sr-only">Bookmark</span>
                       {% if bookmarks.get(item.location.location_id, 'True') %}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bookmark-icon w-6 h-6">
@@ -61,56 +49,25 @@
           {% endif %}
 
         </ul>
-      </div>
     </div>
-
-    <div class="bg-gray-50 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:pr-8 xl:pr-0">
-      <section class="map lg:w-80">
-        <div id="map" style="height: 500px; width: 100%;"></div>
-      </section>
+    <div class="col-9">
+      <div id="map" style="height: 1050px;"></div>
     </div>
   </div>
 </div>
 
 
 
-  <!-- <div class="container-fluid d-flex">
-    <div class="col-4" id="history">
-      {% if history %}
-        {% for item in history %}
-          <div class="mt-3">
-            <a href="/locations/{{ item.location.location_id }}">
-              {{ item.location.name }}</a>
-            <button class="bookmark" id="{{ item.location.location_id }}">
-              {% if bookmarks.get(item.location.location_id, 'True') %}
-              <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bookmark-icon w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-              </svg>
-              {% else %}
-              <svg xmlns="http://www.w3.org/2000/svg" fill="None" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bookmark-icon w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-              </svg>
-              {% endif %}
-            </button>
-            <div id="item-{{ item.location_id }}"
-              class="search-results location-address">
-              {{ item.location.addr }}</div>
-          </div>
-        {% endfor %}
-      {% endif %}
-
-      <h2>Navigation</h2>
-      <ul>
-        <li><a href="/locations">View all locations</a></li>
-        <li><a href="/users">View all users</a></li>
-      </ul>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
     </div>
-
-    <section class="map col-8">
-      <div id="map" style="height: 500px; width: 100%;"></div>
-    </section>
-  </div> -->
-
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div> -->
 
   <script src="/static/js/map.js"></script>
   <script src="/static/js/bookmark.js"></script>
