@@ -19,14 +19,12 @@ def homepage():
     """View homepage."""
 
     active_page = 'home'
-    welcome_msg = "Welcome"
-
-    # -- Check if there's a user logged in
-    user_email = session.get("user_email")
-
     history = None
     welcome_msg = 'Hi'
     bookmarks = {}
+
+    # -- Check if there's a user logged in
+    user_email = session.get("user_email")
 
     if user_email: 
         user = crud.get_user_by_email(user_email)
@@ -68,7 +66,8 @@ def homepage():
 def login():
     """View login page."""
 
-    return render_template("login.html")
+    active_page = ''
+    return render_template("login.html", active_page=active_page)
 
 
 @app.route("/login", methods=["POST"])
@@ -94,6 +93,7 @@ def process_login():
 def process_logout():
     """Log out user"""
 
+    active_page = ''
     del session["user_email"]
 
     return redirect("/")
@@ -103,7 +103,9 @@ def process_logout():
 def create_account():
     """View new account page."""
 
-    return render_template("create_account.html")
+    active_page = ''
+
+    return render_template("create_account.html", active_page=active_page)
 
 @app.route("/bookmarks")
 def bookmarks():
@@ -132,6 +134,7 @@ def bookmarks():
 def all_locations():
     """View all locations"""
 
+    active_page = ''
     locations = crud.get_locations()
 
     user_email = session.get("user_email")
@@ -146,13 +149,14 @@ def all_locations():
     print(f"\n===== ***** {fav_locations} ***** =====\n")
     #-------------------------------------------------
 
-    return render_template("all_locations.html", locations=locations, fav_locations=fav_locations)
+    return render_template("all_locations.html", locations=locations, fav_locations=fav_locations, active_page=active_page)
 
 
 @app.route("/locations/<location_id>")
 def show_location(location_id):
     """Show details on a particular location."""
 
+    active_page = ''
     location = crud.get_location_by_id(location_id)
     comments = crud.get_comments_by_location(location_id)
 
@@ -160,7 +164,7 @@ def show_location(location_id):
         # flash("Location not found. Please enter a new location.")
         return redirect("/")
 
-    return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY)
+    return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY, active_page=active_page)
 
 
 @app.route("/locations/<location_id>/comments", methods=["POST"])
@@ -221,9 +225,10 @@ def create_rating(location_id):
 def all_users():
     """View all users."""
 
+    active_page = ''
     users = crud.get_users()
 
-    return render_template("all_users.html", users=users)
+    return render_template("all_users.html", users=users, active_page=active_page)
 
 
 @app.route("/users", methods=["POST"])
@@ -249,9 +254,10 @@ def register_user():
 def show_user(user_id):
     """Show details on a particular user."""
 
+    active_page = ''
     user = crud.get_user_by_id(user_id)
 
-    return render_template("user_details.html", user=user)
+    return render_template("user_details.html", user=user, active_page=active_page)
 
 
 @app.route("/update_comment", methods=["POST"])
