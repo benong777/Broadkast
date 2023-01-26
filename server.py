@@ -18,6 +18,7 @@ GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_KEY']
 def homepage():
     """View homepage."""
 
+    active_page = 'home'
     welcome_msg = "Welcome"
 
     # -- Check if there's a user logged in
@@ -58,6 +59,7 @@ def homepage():
     return render_template("homepage.html",
                             welcome_msg=welcome_msg,
                             google_api_key=GOOGLE_MAPS_API_KEY,
+                            active_page=active_page,
                             history=history,
                             bookmarks=bookmarks)
 
@@ -107,6 +109,8 @@ def create_account():
 def bookmarks():
     """View user's bookmarked locations."""
 
+    active_page = 'bookmark'
+
     user_email = session.get("user_email")
 
     if user_email:
@@ -120,7 +124,7 @@ def bookmarks():
         bookmarks = crud.get_bookmark_by_user(user.user_id)
         print(f"Bookmarks: {bookmarks}")
 
-    return render_template("bookmarks.html", bookmarks=bookmarks)
+    return render_template("bookmarks.html", bookmarks=bookmarks, active_page=active_page)
     # return render_template("all_locations.html", locations=locations, fav_locations=fav_locations)
 
 
