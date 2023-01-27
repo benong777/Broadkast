@@ -25,3 +25,29 @@ for (const button of editButtons) {
     });
   });
 }
+
+function clickPress(event) {
+  if (event.key == "Enter") {
+      const myInput = event.target.value;
+      console.log(myInput);
+    const formInputs = {
+      updated_comment: myInput,
+      comment_id: 8,
+    };
+
+    // send a fetch request to the update data
+    fetch('/update_comment', {
+      method: 'POST',
+      body: JSON.stringify(formInputs),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      if (response.ok) {
+        document.querySelector(`#comment-id-${8}`).innerHTML = myInput;
+      } else {
+        alert('Failed to update comment.');
+      }
+    });
+  }
+}
