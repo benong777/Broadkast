@@ -157,6 +157,9 @@ def show_location(location_id):
     """Show details on a particular location."""
 
     active_page = ''
+    user_email = session.get("user_email")
+    user = crud.get_user_by_email(user_email)
+
     location = crud.get_location_by_id(location_id)
     comments = crud.get_comments_by_location(location_id)
 
@@ -164,22 +167,22 @@ def show_location(location_id):
         # flash("Location not found. Please enter a new location.")
         return redirect("/")
 
-    return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY, active_page=active_page)
+    return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY, active_page=active_page, user=user)
 
 
 @app.route("/locations/<location_id>/comments", methods=["POST"])
 def create_comment(location_id):
     """Create a new comment for the location."""
 
-    logged_in_email = session.get("user_email")
+    user_email = session.get("user_email")
     comment_input = request.form.get("comment")
 
-    if logged_in_email is None:
+    if user_email is None:
         flash("You must log in to submit a comment.")
     elif not comment_input:
         flash("Error: you didn't select a score for your rating.")
     else:
-        user = crud.get_user_by_email(logged_in_email)
+        user = crud.get_user_by_email(user_email)
         location = crud.get_location_by_id(location_id)
 
         comment = crud.create_comment(user, location, comment_input, datetime.now(), True)
@@ -195,21 +198,21 @@ def create_comment(location_id):
 def create_rating(location_id):
     """Create a new rating for the location."""
 
-    logged_in_email = session.get("user_email")
+    user_email = session.get("user_email")
     rating_score = request.form.get("rating")
 
-    if logged_in_email is None:
+    if user_email is None:
         flash("You must log in to rate a location.")
     elif not rating_score:
         flash("Error: you didn't select a score for your rating.")
     else:
-        user = crud.get_user_by_email(logged_in_email)
+        user = crud.get_user_by_email(user_email)
         location = crud.get_location_by_id(location_id)
 
         # if not user:    # Do we need this additional check? user_email in sessions cookie, but user not in database
         #                 # User was deleted in the database
         #     print(f"***** User not in database *****")
-        #     print(f"***** {logged_in_email}: {user} *****")
+        #     print(f"***** {user_email}: {user} *****")
         #     return redirect("/login")
 
         rating = crud.create_rating(user, location, int(rating_score), datetime.now(), True)
