@@ -5,11 +5,15 @@ for (const button of editButtons) {
     // const currComment = document.querySelector(`#comment-id-${button.id}`);
     // currComment.classList.add("hidden");
 
-    //-- Hide comment
-    document.getElementById(`comment-id-${button.id}`).classList.toggle("hidden");
-    //-- Show input field
-    document.getElementById(`edit-input-id-${button.id}`).classList.toggle("hidden");
+    //-- Get ID: Split name by "-" and get last element, which is the ID
+    const editBtnId = (button.id).split("-").at(-1);
+    // console.log("Remove input:", editInput.id);
+    // console.log("ID:", commentId);
 
+    //-- Hide comment
+    document.getElementById(`comment-id-${editBtnId}`).classList.toggle("hidden");
+    //-- Show input field
+    document.getElementById(`edit-input-id-${editBtnId}`).classList.toggle("hidden");
 
     if (button.innerHTML === 'Edit') {
       button.innerHTML = "Cancel";
@@ -55,6 +59,10 @@ for (const editInput of editInputs) {
       //-- Get updated text that were typed in and show the comment
       const newComment = document.getElementById(`edit-input-id-${commentId}`).value;
 
+      //-- Restore edit btn
+      const currEditButton = document.getElementById(`edit-comment-btn-id-${commentId}`);
+      currEditButton.innerHTML = "Edit";
+
       const formInputs = {
         updated_comment: newComment,
         comment_id: commentId,
@@ -69,12 +77,12 @@ for (const editInput of editInputs) {
         },
       }).then((response) => {
         if (response.ok) {
-      const commentElement = document.getElementById(`comment-id-${commentId}`)
-      commentElement.innerHTML = newComment;
-      commentElement.classList.toggle("hidden");
+          const commentElement = document.getElementById(`comment-id-${commentId}`)
+          commentElement.innerHTML = newComment;
+          commentElement.classList.toggle("hidden");
 
-      //-- Hide input textarea
-      document.getElementById(`edit-input-id-${commentId}`).classList.toggle("hidden");
+          //-- Hide input textarea
+          document.getElementById(`edit-input-id-${commentId}`).classList.toggle("hidden");
 
         } else {
           document.querySelector(`#comment-id-${button.id}`).innerHTML = oldComment;
