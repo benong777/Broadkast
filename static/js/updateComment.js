@@ -1,53 +1,108 @@
-editButtons = document.querySelectorAll('.edit-comment');
+editButtons = document.querySelectorAll('.edit-comment-btn');
 
 for (const button of editButtons) {
   button.addEventListener('click', () => {
-    // Prompt for new comment
-    const newComment = prompt('Add your new comment here.');
-    const formInputs = {
-      updated_comment: newComment,
-      comment_id: button.id,
-    };
+    // const currComment = document.querySelector(`#comment-id-${button.id}`);
+    // currComment.classList.add("hidden");
 
-    // send a fetch request to the update data
-    fetch('/update_comment', {
-      method: 'POST',
-      body: JSON.stringify(formInputs),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => {
-      if (response.ok) {
-        document.querySelector(`#comment-id-${button.id}`).innerHTML = newComment;
-      } else {
-        alert('Failed to update comment.');
-      }
-    });
+    //-- Hide comment
+    document.getElementById(`comment-id-${button.id}`).classList.toggle("hidden");
+    //-- Show input field
+    document.getElementById(`edit-input-id-${button.id}`).classList.toggle("hidden");
+
+    // const formInputs = {
+    //   updated_comment: newComment,
+    //   comment_id: button.id,
+    // };
+
+    // // send a fetch request to the update data
+    // fetch('/update_comment', {
+    //   method: 'POST',
+    //   body: JSON.stringify(formInputs),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // }).then((response) => {
+    //   if (response.ok) {
+    //     document.querySelector(`#comment-id-${button.id}`).innerHTML = newComment;
+    //   } else {
+    //     alert('Failed to update comment.');
+    //   }
+    // });
+  });
+}
+
+const editInputs = document.querySelectorAll('.edit-input');
+
+for (const editInput of editInputs) {
+  editInput.addEventListener("keypress", (e) => {
+    //-- When the enter key is pressed, grab value and send AJAX fetch
+    if (e.key === "Enter") {
+      //-- Get ID: Split name by "-" and get last element, which is the ID
+      const commentId = (editInput.id).split("-").at(-1);
+      // console.log("Remove input:", editInput.id);
+      // console.log("ID:", commentId);
+
+      const oldComment = document.getElementById(`comment-id-${commentId}`).innerHTML;
+
+      //-- Get updated text that were typed in and show the comment
+      const newComment = document.getElementById(`edit-input-id-${commentId}`).value;
+
+      const formInputs = {
+        updated_comment: newComment,
+        comment_id: commentId,
+      };
+     
+      //-- send a fetch request to the update data
+      fetch('/update_comment', {
+        method: 'POST',
+        body: JSON.stringify(formInputs),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((response) => {
+        if (response.ok) {
+      const commentElement = document.getElementById(`comment-id-${commentId}`)
+      commentElement.innerHTML = newComment;
+      commentElement.classList.toggle("hidden");
+
+      //-- Hide input textarea
+      document.getElementById(`edit-input-id-${commentId}`).classList.toggle("hidden");
+
+        } else {
+          document.querySelector(`#comment-id-${button.id}`).innerHTML = oldComment;
+          alert('Failed to update comment.');
+        }
+      });
+    }
   });
 }
 
 function clickPress(event) {
-  if (event.key == "Enter") {
-      const myInput = event.target.value;
-      console.log(myInput);
-    const formInputs = {
-      updated_comment: myInput,
-      comment_id: 8,
-    };
+  // if (event.key == "Enter") {
+  //   const myInput = event.target.value;
+  //   console.log(myInput);
 
-    // send a fetch request to the update data
-    fetch('/update_comment', {
-      method: 'POST',
-      body: JSON.stringify(formInputs),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }).then((response) => {
-      if (response.ok) {
-        document.querySelector(`#comment-id-${8}`).innerHTML = myInput;
-      } else {
-        alert('Failed to update comment.');
-      }
-    });
-  }
+  //   document.getElementById("comment-id-1").classList.toggle("hidden");
+
+  //   const formInputs = {
+  //     updated_comment: myInput,
+  //     comment_id: 8,
+  //   };
+
+  //   // send a fetch request to the update data
+  //   fetch('/update_comment', {
+  //     method: 'POST',
+  //     body: JSON.stringify(formInputs),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   }).then((response) => {
+  //     if (response.ok) {
+  //       document.querySelector(`#comment-id-${8}`).innerHTML = myInput;
+  //     } else {
+  //       alert('Failed to update comment.');
+  //     }
+  //   });
+  // }
 }
