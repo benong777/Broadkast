@@ -55,9 +55,9 @@
                             <span class="font-medium text-gray-500">{{ comment.created_at.strftime('%H:%M %m-%d-%Y') }}</span>
                             {% if user.user_id == comment.user_id %}
                               <span class="font-medium text-gray-500">&middot;</span>
-                              <button type="button" id="{{ comment.comment_id }}" class="edit-comment-btn font-medium text-gray-900">Edit</button>
+                              <button type="button" id="edit-comment-btn-id-{{ comment.comment_id }}" class="edit-comment-btn font-medium text-gray-900">Edit</button>
                             {% else %}
-                              <button type="button" id="{{ comment.comment_id }}" class="hidden edit-comment-btn font-medium text-gray-900">Edit</button>
+                              <button type="button" id="edit-comment-btn-id-{{ comment.comment_id }}" class="edit-comment-btn hidden font-medium text-gray-900">Edit</button>
                             {% endif %}
                           </div>
                         </div>
