@@ -10,6 +10,13 @@ for (const button of editButtons) {
     //-- Show input field
     document.getElementById(`edit-input-id-${button.id}`).classList.toggle("hidden");
 
+
+    if (button.innerHTML === 'Edit') {
+      button.innerHTML = "Cancel";
+    } else {
+      button.innerHTML = "Edit";
+    }
+
     // const formInputs = {
     //   updated_comment: newComment,
     //   comment_id: button.id,
