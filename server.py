@@ -117,17 +117,13 @@ def bookmarks():
 
     if user_email:
         user = crud.get_user_by_email(user_email)
-        location = crud.get_location_by_name("Starbucks")
-
-        #-- Temp
-        # crud.add_bookmark(user.user_id, location.location_id)
-        #-- Temp
-
         bookmarks = crud.get_bookmark_by_user(user.user_id)
         print(f"Bookmarks: {bookmarks}")
 
+    else:
+        return redirect("/login")
+
     return render_template("bookmarks.html", bookmarks=bookmarks, active_page=active_page)
-    # return render_template("all_locations.html", locations=locations, fav_locations=fav_locations)
 
 
 @app.route("/locations")
