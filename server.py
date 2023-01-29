@@ -22,13 +22,15 @@ def homepage():
     history = None
     welcome_msg = 'Hi'
     bookmarks = {}
+    user = {}
 
     # -- Check if there's a user logged in
     user_email = session.get("user_email")
 
     if user_email: 
         user = crud.get_user_by_email(user_email)
-        print(f"  ***** {user.user_id} *****")
+        # print(f"  ***** {user.user_id} *****")
+        print(f"  ***** {user} *****")
         fname = user.fname
         welcome_msg += " " + fname
         # history = crud.get_history_by_user(user.user_id)
@@ -77,7 +79,11 @@ def process_login():
     email = request.form.get("email")
     password = request.form.get("password")
 
+    print(f"Email: {email}")
+    print(f"Password: {password}")
+
     user = crud.get_user_by_email(email)
+    print(f"User: {user}")
     if not user or user.password != password:
         flash("The email or password you entered was incorrect.")
         return redirect("/login")
@@ -365,16 +371,16 @@ def get_location():
     addr = request.args.get("locationAddr")
     lat = request.args.get("locationLat")
     lng = request.args.get("locationLng")
-    # geometry = request.args.get("locationGeometry")
-    # print(f"   +++++++++\n {name}\n{addr}\n{geometry}   +++++++++")
-    print(f"   +++++++++\n {name}\n{addr}\n{lat}\t{lng}   +++++++++")
+    website = request.args.get("locationWebsite")
+    phone = request.args.get("locationPhone")
+    print(f"   +++++++++\n {name}\n{addr}\n{lat}\t{lng}\n{website}\n{phone}   +++++++++")
     location = crud.get_location_by_name_and_addr(name, addr)
-    print(f'   *********** \n {location}\n   ***********')
+    print(f'   *********** \n Location: {location}\n   ***********')
 
     #-- If location doesn't exist, add to DB
     if not location:              
         # location = crud.create_location(name, addr, geometry, 32.4, 16.8, datetime.now(), True)
-        location = crud.create_location(name, addr, lat, lng, datetime.now(), True)
+        location = crud.create_location(name, addr, lat, lng, website, phone, datetime.now(), True)
         db.session.add(location)
         db.session.commit()
         print(f'   *********** \n Newly CREATED: {location}\n   ***********')
@@ -392,8 +398,6 @@ def get_location():
             db.session.add(history)
             db.session.commit()
 
-    print("**** GET LOCATION DONE *****")
-
     # 1. convert object -> dictionary
     # 2. result = jsonify dictionary
     # return jsonify({"success": True})
@@ -401,8 +405,6 @@ def get_location():
             "location_id": location.location_id
             }
 
-    # comments = crud.get_comments_by_location(location.location_id)
-    # return render_template("location_details.html", location=location, comments=comments)
 
 
 # @app.route("/add_history", methods=["POST"])

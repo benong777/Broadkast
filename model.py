@@ -39,6 +39,8 @@ class Location(db.Model):
     addr = db.Column(db.String)
     lat  = db.Column(db.Float)
     lng = db.Column(db.Float)
+    website = db.Column(db.String)
+    phone = db.Column(db.String)
     created_at = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
 

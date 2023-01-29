@@ -23,16 +23,18 @@ with open("data/locations.json") as f:
 locations_in_db = []
 for location in location_data:
     # name, description, addr = (
-    name, addr, lat, lng = (
+    name, addr, lat, lng, website, phone = (
         location["name"],
         # location["description"],
         location["addr"],
         location["lat"],
         location["lng"],
+        location["website"],
+        location["phone"],
     )
     # release_date = datetime.strptime(movie["release_date"], "%Y-%m-%d")
 
-    db_location = crud.create_location(name, addr, lat, lng, datetime.now(), True)
+    db_location = crud.create_location(name, addr, lat, lng, website, phone, datetime.now(), True)
     locations_in_db.append(db_location)
 
 model.db.session.add_all(locations_in_db)
