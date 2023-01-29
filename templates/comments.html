@@ -4,7 +4,7 @@
   <!-- Content area -->
   <div class="flex flex-1 flex-col overflow-hidden">
     <header class="w-full">
-      <div class="relative z-10 flex h-1 flex-shrink-0 border-b border-gray-200 bg-white shadow-sm">
+      <div class="relative z-5 flex h-1 flex-shrink-0 border-b border-gray-200 bg-white shadow-sm">
       </div>
     </header>
 
@@ -90,24 +90,6 @@
                   {% endif %}
               </div>
             </div>
-
-            <h2 id="gallery-heading" class="sr-only">Recently viewed</h2>
-            <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-              <li class="relative">
-                <!-- Current: "ring-2 ring-offset-2 ring-indigo-500", Default: "focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500" -->
-                <div class="ring-2 ring-offset-2 ring-indigo-500 group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 overflow-hidden">
-                  <!-- Current: "", Default: "group-hover:opacity-75" -->
-                  <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80" alt="" class="object-cover pointer-events-none">
-                  <button type="button" class="absolute inset-0 focus:outline-none">
-                    <span class="sr-only">View details for IMG_4985.HEIC</span>
-                  </button>
-                </div>
-                <p class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900">IMG_4985.HEIC</p>
-                <p class="pointer-events-none block text-sm font-medium text-gray-500">3.9 MB</p>
-              </li>
-
-              <!-- More files... -->
-            </ul>
           </section>
         </div>
       </main>
@@ -117,9 +99,9 @@
         <div class="space-y-6 pb-16">
           <div>
             <div class="flex items-start justify-between">
-              <div class="mb-2">
-                <h2 class="text-lg font-medium text-gray-900"><span class="sr-only">Details for </span>IMG_4985.HEIC</h2>
-                <p class="text-sm font-medium text-gray-500">3.9 MB</p>
+              <div class="mb-3">
+                <h2 class="text-lg font-medium text-gray-900"><span class="sr-only">Location name</span>{{ location.name }}</h2>
+                <p class="text-sm font-medium text-gray-500">{{ location.addr }}</p>
               </div>
               <button type="button" class="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 <!-- Heroicon name: outline/heart -->
@@ -166,30 +148,10 @@
             <ul role="list" class="mt-2 divide-y divide-gray-200 border-t border-b border-gray-200">
               <li class="flex items-center justify-between py-3">
                 <div class="flex items-center">
-                  <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=1024&h=1024&q=80" alt="" class="h-8 w-8 rounded-full">
-                  <p class="ml-4 text-sm font-medium text-gray-900">Aimee Douglas</p>
-                </div>
-                <button type="button" class="ml-6 rounded-md bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Remove<span class="sr-only"> Aimee Douglas</span></button>
-              </li>
-
-              <li class="flex items-center justify-between py-3">
-                <div class="flex items-center">
                   <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=oilqXxSqey&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="h-8 w-8 rounded-full">
                   <p class="ml-4 text-sm font-medium text-gray-900">Andrea McMillan</p>
                 </div>
                 <button type="button" class="ml-6 rounded-md bg-white text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Remove<span class="sr-only"> Andrea McMillan</span></button>
-              </li>
-
-              <li class="flex items-center justify-between py-2">
-                <button type="button" class="group -ml-1 flex items-center rounded-md bg-white p-1 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                  <span class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-dashed border-gray-300 text-gray-400">
-                    <!-- Heroicon name: mini/plus -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
-                    </svg>
-                  </span>
-                  <span class="ml-4 text-sm font-medium text-indigo-600 group-hover:text-indigo-500">Share</span>
-                </button>
               </li>
             </ul>
           </div>
