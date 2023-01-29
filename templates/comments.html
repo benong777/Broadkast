@@ -40,15 +40,6 @@
                             <p id="comment-id-{{ comment.comment_id }}" class="comment">{{ comment.comment }}</p>
                             <textarea id="edit-input-id-{{ comment.comment_id }}" rows="3" class="hidden edit-input w-96 px-2 border-blue-700 border-2 rounded-md" type="text" value="{{ comment.comment }}" onkeypress="clickPress(event)">{{ comment.comment }}</textarea>
                           </div>
-                          <!-- <div class="mt-2 space-x-2 text-sm">
-                            <span class="font-medium text-gray-500">{{ comment.created_at.strftime('%-I:%M %p %b %-d %Y') }}</span>
-                            {% if user.user_id == comment.user_id %}
-                              <span class="font-medium text-gray-500">&middot;</span>
-                              <button type="button" id="edit-comment-btn-id-{{ comment.comment_id }}" class="edit-comment-btn font-medium text-gray-900">Edit</button>
-                            {% else %}
-                              <button type="button" id="edit-comment-btn-id-{{ comment.comment_id }}" class="edit-comment-btn hidden font-medium text-gray-900">Edit</button>
-                            {% endif %}
-                          </div> -->
                         </div>
                       </div>
                       <div class="flex justify-end">
@@ -67,7 +58,7 @@
                 </ul>
               </div>
             </div>
-            <div class="bg-gray-50 px-4 py-6 sm:px-6">
+            <div class="bg-gray-50 px-4 py-6 sm:px-6 sm:mx-6">
               <div class="flex space-x-3">
                 {% if session.get('user_email') %}
                   <div class="flex-shrink-0">
@@ -116,8 +107,8 @@
                 <span class="sr-only">Bookmark</span>
               </button>
             </div>
+            <!-- Map -->
             <div class="aspect-w-10 aspect-h-7 block w-full overflow-hidden rounded-lg">
-              <!-- Map -->
               <div id="map-location" style="height: 300px; width: 100%;"></div>
             </div>
           </div>
@@ -133,26 +124,22 @@
                 <dd title="{{ location.website }}" class="truncate whitespace-nowrap ml-5 text-gray-900"> {{ location.website }} </dd>
               </div>
             </dl>
-              <div class="flex justify-between mt-1 py-3 text-sm font-medium items-center">
-                <!-- <dt class="text-gray-500"> -->
-                  <button title="{{ location.phone }}" type="button" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
-                    <!-- Heroicon name: link -->
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-                    </svg>
-                    <span class="pl-1"><a href="{{ location.website }}">Link</a></span>
-                  </button>
-                <!-- </dt> -->
-                <!-- <dd class="whitespace-nowrap text-gray-900"> -->
-                  <button title="{{ location.phone }}" type="button" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
-                    <!-- Heroicon name: mini/phone -->
-                    <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
-                    </svg>
-                    <span><a href="tel://+{{ location.phone }}">Call</a></span>
-                  </button>
-                <!-- </dd> -->
-              </div>
+            <div class="flex justify-between mt-1 py-3 text-sm font-medium items-center">
+                <button title="{{ location.phone }}" type="button" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+                  <!-- Heroicon name: link -->
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                  </svg>
+                  <span class="pl-1"><a href="{{ location.website }}">Link</a></span>
+                </button>
+                <button title="{{ location.phone }}" type="button" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+                  <!-- Heroicon name: mini/phone -->
+                  <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                  </svg>
+                  <span><a href="tel://+{{ location.phone }}">Call</a></span>
+                </button>
+            </div>
           </div>
         </div>
       </aside>
