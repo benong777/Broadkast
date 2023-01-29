@@ -1,16 +1,11 @@
 [
   {
-    "name": "Golden Gate Bakery",
-    "addr": "1029 Grant Ave, San Francisco, CA 94133, USA",
-    "lat": "37.7964028",
-    "lng": "-122.4068806",
-    "active": "True"
-  },
-  {
     "name": "Northstar California Resort",
     "addr": "5001 Northstar Dr, Truckee, CA 96161, USA",
     "lat": "39.27456779999999",
     "lng": "-120.1210934",
+    "website": "https://www.northstarcalifornia.com/",
+    "phone": "(530) 562-2267",
     "active": "True"
   },
   {
@@ -18,6 +13,8 @@
     "addr": "71 Curtner Ave Suite 20, San Jose, CA 95125, USA",
     "lat": "37.3026313",
     "lng": "-121.864222",
+    "website": "theboilingcrab.com",
+    "phone": "4082972322",
     "active": "True"
   }
 ]
