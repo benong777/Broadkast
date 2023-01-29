@@ -99,7 +99,7 @@ function initMap() {
       {
         componentRestrictions: {'country': ['us']},
         // fields: ['geometry', 'name', 'formatted_address', 'photos'],
-        fields: ['geometry', 'name', 'formatted_address'],
+        fields: ['geometry', 'name', 'website', 'formatted_phone_number', 'formatted_address'],
         types: ['establishment']
       });
 
@@ -110,11 +110,15 @@ function initMap() {
         const formatted_address = place.formatted_address;
         const geometry = place.geometry;
         const photos = place.photos;
+        const website = place.website;
+        const phone = place.formatted_phone_number;
 
         console.log("Photos: ", photos);
         console.log("name: ", name);
         console.log("Address: ", formatted_address);
         console.log("Geometry: ", geometry);
+        console.log("Website: ", website);
+        console.log("Phone: ", phone);
 
         if (!place.geometry) {
           alert("No location found");
@@ -130,10 +134,18 @@ function initMap() {
 
           //-- Center map to searched location
           basicMap.setCenter(place.geometry.location);
-          basicMap.setZoom(18);
+          basicMap.setZoom(16);
 
           // Check if location exist in DB
-          const queryString = new URLSearchParams({ locationName: place.name, locationLat: place.geometry.location.lat(), locationLng: place.geometry.location.lng(), locationAddr: place.formatted_address }).toString();
+          const queryString = new URLSearchParams(
+                                      { 
+                                        locationName: place.name,
+                                        locationLat: place.geometry.location.lat(),
+                                        locationLng: place.geometry.location.lng(),
+                                        locationAddr: place.formatted_address,
+                                        locationWebsite: website,
+                                        locationPhone: phone,
+                                      }).toString();
           const url = `/get_location?${queryString}`;
           console.log(url);
 
