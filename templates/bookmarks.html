@@ -17,7 +17,8 @@
         <div class="flex w-full items-center justify-between space-x-6 p-6">
           <div class="flex-1 truncate">
             <div class="flex items-center space-x-3 justify-between">
-              <h3 class="truncate text-sm font-medium text-gray-900">{{ bookmark.location.name }}</h3>
+              <a href="/locations/{{ bookmark.location_id }}"
+                 class="truncate text-sm font-medium text-gray-900">{{ bookmark.location.name }}</a>
               <button type="button" id="{{ bookmark.location_id }}" class="bookmark z-10" onclick="removeBookmark({{bookmark.location.location_id}})">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bookmark-icon w-5 h-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
