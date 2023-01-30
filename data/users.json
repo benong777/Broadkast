@@ -1,16 +1,30 @@
 [
   {
     "fname": "Ben",
-    "lname": "Doe",
+    "lname": "Johnson",
     "email": "user1@test.com",
     "password": "test",
     "phone_num": "408-000-0000"
   },
   {
     "fname": "Vicky",
-    "lname": "Tanner",
+    "lname": "Schwab",
     "email": "user2@test.com",
     "password": "test",
     "phone_num": "408-111-1111"
+  },
+  {
+    "fname": "Aly",
+    "lname": "Tanner",
+    "email": "user3@test.com",
+    "password": "test",
+    "phone_num": "408-222-2222"
+  },
+  {
+    "fname": "Ryan",
+    "lname": "Sanders",
+    "email": "user4@test.com",
+    "password": "test",
+    "phone_num": "408-333-3333"
   }
 ]
