@@ -8,6 +8,78 @@
     "phone": "(530) 562-2267",
     "active": "True"
   },
+  { 
+    "name": "Northstar California Resort",
+    "addr": "5001 Northstar Dr, Truckee, CA 96161, USA",
+    "lat": "39.27456779999999",
+    "lng": "-120.1210934",
+    "website": "https://www.northstarcalifornia.com/",
+    "phone": "(530) 562-2267",
+    "active": "True"
+  },
+  { 
+    "name": "Kirkwood Mountain Resort",
+    "addr": "1501 Kirkwood Meadows Dr, Kirkwood, CA 95646, USA",
+    "lat": "38.6847514",
+    "lng": "-120.0651665",
+    "website": "http://www.kirkwood.com/",
+    "phone": "(209) 258-6000",
+    "active": "True"
+  },
+  { 
+    "name": "Golden Gate Bakery",
+    "addr": "1029 Grant Ave, San Francisco, CA 94133, USA",
+    "lat": "37.7964028",
+    "lng": "-122.4068806",
+    "website": "undefined",
+    "phone": "(415) 781-2627",
+    "active": "True"
+  },
+  { 
+    "name": "Pinewood Park Tennis Courts",
+    "addr": "1375 Starlite Dr, Milpitas, CA 95035, USA",
+    "lat": "37.4093898",
+    "lng": "-121.9095568",
+    "website": "",
+    "phone": "",
+    "active": "True"
+  },
+  { 
+    "name": "Carmel by the sea",
+    "addr": "Carmel-By-The-Sea, CA 93923, USA",
+    "lat": "36.55523979999999",
+    "lng": "-121.9231944",
+    "website": "undefined",
+    "phone": "undefined",
+    "active": "True"
+  },
+  { 
+    "name": "California's Great America",
+    "addr": "4701 Great America Pkwy, Santa Clara, CA 95054, USA",
+    "lat": "37.3984051",
+    "lng": "-121.9751567",
+    "website": "http://www.cagreatamerica.com/",
+    "phone": "(408) 988-1776",
+    "active": "True"
+  },
+  { 
+    "name": "Stanford Parking L-17",
+    "addr": "Unnamed Road, Stanford, CA 94305, USA",
+    "lat": "37.43129100000001",
+    "lng": "-122.1803324",
+    "website": "undefined",
+    "phone": "undefined",
+    "active": "True"
+  },
+  { 
+    "name": "Heavenly Mountain Resort",
+    "addr": "4080 Lake Tahoe Blvd, South Lake Tahoe, CA 96150, USA",
+    "lat": "38.95692409999999",
+    "lng": "-119.9428424",
+    "website": "http://www.skiheavenly.com/",
+    "phone": "(775) 586-7000",
+    "active": "True"
+  },
   {
     "name": "The Boiling Crab",
     "addr": "71 Curtner Ave Suite 20, San Jose, CA 95125, USA",
