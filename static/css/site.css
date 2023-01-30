@@ -1,3 +1,7 @@
 .card-shadow {
    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
 }
+
+.logo{
+   font-family: 'Damion', sans-serif;
+}
