@@ -15,10 +15,9 @@ An app where users can communicate and post location information and status.
 - CSS
 
 [<img alt="alt_text" width="40px" src="static/img/login.png" />]
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/login.png)
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/homepage.png)
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/bookmark.png)
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/comments.png)
+[<img alt="alt_text" width="80px" src="static/img/homepage.png" />]
+[<img alt="alt_text" width="80px" src="static/img/bookmark.png" />]
+[<img alt="alt_text" width="80px" src="static/img/comments.png" />]
 
 
 ## Data Model
