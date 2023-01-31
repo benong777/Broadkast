@@ -1,4 +1,4 @@
-# Project Proposal
+# Project Overview
 
 An app where users can communicate and post location information and status.
 
