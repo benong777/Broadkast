@@ -64,6 +64,45 @@ model.db.session.add_all(users_in_db)
 model.db.session.commit()
 
 
+# Create history for testing
+with open("data/history.json") as f:
+    history_data = json.loads(f.read())
+
+# Create locations in history table
+history_in_db = []
+for item in history_data:
+    user_id, location_id = (
+        item["user_id"],
+        item["location_id"],
+    )
+    # release_date = datetime.strptime(movie["release_date"], "%Y-%m-%d")
+
+    db_history = crud.add_history(user_id, location_id)
+    history_in_db.append(db_history)
+
+model.db.session.add_all(history_in_db)
+model.db.session.commit()
+
+
+# Create bookmark for testing
+with open("data/bookmark.json") as f:
+    bookmark_data = json.loads(f.read())
+
+# Create bookmarks, store them in list
+bookmark_in_db = []
+for bookmark in bookmark_data:
+    user_id, location_id = (
+        bookmark["user_id"],
+        bookmark["location_id"],
+    )
+
+    db_bookmark = crud.add_bookmark(user_id, location_id)
+    bookmark_in_db.append(db_bookmark)
+
+model.db.session.add_all(bookmark_in_db)
+model.db.session.commit()
+
+
 
 # # Create users; each user will make n comments
 # for n in range(3):
