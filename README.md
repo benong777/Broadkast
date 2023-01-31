@@ -14,10 +14,10 @@ An app where users can communicate and post location information and status.
 - HTML
 - CSS
 
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/login.png "Login Page")
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/homepage.png "Homepage Page")
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/bookmark.png "Bookmark Page")
-![alt text](https://github.com/benong777/capstone/tree/main/static/img/comments.png "Comments Page")
+![alt text](https://github.com/benong777/capstone/tree/main/static/img/login.png)
+![alt text](https://github.com/benong777/capstone/tree/main/static/img/homepage.png)
+![alt text](https://github.com/benong777/capstone/tree/main/static/img/bookmark.png)
+![alt text](https://github.com/benong777/capstone/tree/main/static/img/comments.png)
 
 
 ## Data Model
