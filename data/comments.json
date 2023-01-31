@@ -1,0 +1,17 @@
+[
+  { 
+    "user_id": 2,
+    "location_id": 1,
+    "comment": "How's the snow?"
+  },
+  {
+    "user_id": 2,
+    "location_id": 1,
+    "comment": "Were chains required driving up 80N?"
+  },
+  {
+    "user_id": 3,
+    "location_id": 1,
+    "comment": "Are all lifts open?"
+  }
+]
