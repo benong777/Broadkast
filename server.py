@@ -336,7 +336,7 @@ def remove_bookmark():
         print(f"  ***** {user.user_id} *****")
 
         location_id = request.json["locationId"]
-        print(f"{location_id}");
+        print(f"{location_id}")
 
         bookmark = crud.get_bookmark_by_user_and_location(user.user_id, location_id)
         print(bookmark)
