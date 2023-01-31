@@ -42,12 +42,12 @@ function initMapLocation() {
       alert('Hi!');
     });
   
-    const sfInfo = new google.maps.InfoWindow({
-      content: `<h1>${currentName}</h1>
-                <h2>${currentAddr}</h2>`,
-    });
+    // const sfInfo = new google.maps.InfoWindow({
+    //   content: `<h1>${currentName}</h1>
+    //             <h2>${currentAddr}</h2>`,
+    // });
   
-    sfInfo.open(basicMap, sfMarker);
+    // sfInfo.open(basicMap, sfMarker);
   
     const locations = [
       // {
@@ -154,7 +154,7 @@ function initMapLocation() {
 
           //-- Center map to searched location
           basicMap.setCenter(place.geometry.location);
-          basicMap.setZoom(8);
+          basicMap.setZoom(16);
 
           // Check if location exist in DB
           // const queryString = new URLSearchParams({ locationName: place.name, locationGeometry: place.geometry.location, locationAddr: place.formatted_address }).toString();
