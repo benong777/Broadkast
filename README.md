@@ -14,10 +14,12 @@ An app where users can communicate and post location information and status.
 - HTML
 - CSS
 
-[<img alt="alt_text" width="150px" src="static/img/login.png" />]
-[<img alt="alt_text" width="150px" src="static/img/homepage.png" />]
-[<img alt="alt_text" width="150px" src="static/img/bookmark.png" />]
-[<img alt="alt_text" width="150px" src="static/img/comments.png" />]
+
+## Screenshots
+<img alt="alt_text" width="200px" src="static/img/login.png" />
+<img alt="alt_text" width="200px" src="static/img/homepage.png" />
+<img alt="alt_text" width="200px" src="static/img/bookmark.png" />
+<img alt="alt_text" width="200px" src="static/img/comments.png" />
 
 
 ## Data Model
