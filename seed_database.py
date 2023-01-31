@@ -103,6 +103,25 @@ model.db.session.add_all(bookmark_in_db)
 model.db.session.commit()
 
 
+# # Create comments for testing
+# with open("data/comments.json") as f:
+#     comment_data = json.loads(f.read())
+
+# # Create comments, store them in list
+# comments_in_db = []
+# for comment in comment_data:
+#     user_id, location_id, comment = (
+#         comment["user_id"],
+#         comment["location_id"],
+#         comment["comment"],
+#     )
+
+#     db_comment = crud.create_comment(user_id, location_id, comment, datetime.now(), True)
+#     comments_in_db.append(db_comment)
+
+# model.db.session.add_all(comments_in_db)
+# model.db.session.commit()
+
 
 # # Create users; each user will make n comments
 # for n in range(3):
