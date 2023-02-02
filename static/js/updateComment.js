@@ -2,13 +2,8 @@ editButtons = document.querySelectorAll('.edit-comment-btn');
 
 for (const button of editButtons) {
   button.addEventListener('click', () => {
-    // const currComment = document.querySelector(`#comment-id-${button.id}`);
-    // currComment.classList.add("hidden");
-
     //-- Get ID: Split name by "-" and get last element, which is the ID
     const editBtnId = (button.id).split("-").at(-1);
-    // console.log("Remove input:", editInput.id);
-    // console.log("ID:", commentId);
 
     //-- Hide comment
     document.getElementById(`comment-id-${editBtnId}`).classList.toggle("hidden");
@@ -20,26 +15,6 @@ for (const button of editButtons) {
     } else {
       button.innerHTML = "Edit";
     }
-
-    // const formInputs = {
-    //   updated_comment: newComment,
-    //   comment_id: button.id,
-    // };
-
-    // // send a fetch request to the update data
-    // fetch('/update_comment', {
-    //   method: 'POST',
-    //   body: JSON.stringify(formInputs),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // }).then((response) => {
-    //   if (response.ok) {
-    //     document.querySelector(`#comment-id-${button.id}`).innerHTML = newComment;
-    //   } else {
-    //     alert('Failed to update comment.');
-    //   }
-    // });
   });
 }
 
@@ -51,9 +26,6 @@ for (const editInput of editInputs) {
     if (e.key === "Enter") {
       //-- Get ID: Split name by "-" and get last element, which is the ID
       const commentId = (editInput.id).split("-").at(-1);
-      // console.log("Remove input:", editInput.id);
-      // console.log("ID:", commentId);
-
       const oldComment = document.getElementById(`comment-id-${commentId}`).innerHTML;
 
       //-- Get updated text that were typed in and show the comment
@@ -91,33 +63,4 @@ for (const editInput of editInputs) {
       });
     }
   });
-}
-
-function clickPress(event) {
-  // if (event.key == "Enter") {
-  //   const myInput = event.target.value;
-  //   console.log(myInput);
-
-  //   document.getElementById("comment-id-1").classList.toggle("hidden");
-
-  //   const formInputs = {
-  //     updated_comment: myInput,
-  //     comment_id: 8,
-  //   };
-
-  //   // send a fetch request to the update data
-  //   fetch('/update_comment', {
-  //     method: 'POST',
-  //     body: JSON.stringify(formInputs),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   }).then((response) => {
-  //     if (response.ok) {
-  //       document.querySelector(`#comment-id-${8}`).innerHTML = myInput;
-  //     } else {
-  //       alert('Failed to update comment.');
-  //     }
-  //   });
-  // }
 }
