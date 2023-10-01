@@ -29,13 +29,9 @@ def homepage():
 
     if user_email: 
         user = crud.get_user_by_email(user_email)
-        # print(f"  ***** {user.user_id} *****")
-        print(f"  ***** {user} *****")
         fname = user.fname
         welcome_msg += " " + fname
-        # history = crud.get_history_by_user(user.user_id)
         history = crud.get_history_by_user(user.user_id)[::-1]
-        print(f"  ***** {history} *****")
 
         if history:
             for item in history:
@@ -47,15 +43,6 @@ def homepage():
                     is_bookmarked = False
                     bookmarks[item.location.location_id] = is_bookmarked
 
-                print(f"***** ===== {item} ===== *****")
-                print(f"***** ===== {bookmark} ===== *****")
-                print(f"***** ===== User_ID: {user.user_id}, Location: {item.location_id} ===== *****")
-                # print(f"***** ===== {is_bookmarked} ===== *****")
-                
-            print(f"***** ===== {history} ===== *****")
-            print(f"***** ===== {bookmarks} ===== *****")
-        # del session["user_email"]
-
     return render_template("homepage.html",
                             welcome_msg=welcome_msg,
                             google_api_key=GOOGLE_MAPS_API_KEY,
@@ -64,35 +51,58 @@ def homepage():
                             bookmarks=bookmarks)
 
 
-@app.route("/login")
-def login():
-    """View login page."""
+# @app.route("/login")
+# def login():
+#     """View login page."""
 
-    active_page = ''
-    return render_template("login.html", active_page=active_page)
+#     active_page = ''
+#     return render_template("login.html", active_page=active_page)
 
+### Web / Jinja
+# @app.route("/login", methods=["POST"])
+# def process_login():
+#     """Process user login."""
 
+#     email = request.form.get("email")
+#     password = request.form.get("password")
+
+#     print(f"Email: {email}")
+#     print(f"Password: {password}")
+
+#     user = crud.get_user_by_email(email)
+#     print(f"User: {user}")
+#     if not user or user.password != password:
+#         flash("The email or password you entered was incorrect.")
+#         return redirect("/login")
+#     else:
+#         # Log in user by storing the user's email in session
+#         session["user_email"] = user.email
+#         # flash(f"Welcome back, {user.fname}!")
+
+#     return redirect("/")
+
+### React Native
 @app.route("/login", methods=["POST"])
 def process_login():
     """Process user login."""
 
-    email = request.form.get("email")
-    password = request.form.get("password")
+    email = request.json["email"]
+    password = request.json["password"]
 
-    print(f"Email: {email}")
-    print(f"Password: {password}")
+    print(f"Email: {email},  Password: {password}")
 
     user = crud.get_user_by_email(email)
     print(f"User: {user}")
     if not user or user.password != password:
-        flash("The email or password you entered was incorrect.")
-        return redirect("/login")
+        print("The email or password you entered was incorrect.")
+        return { 'status': 'FAILED - email or password is incorrect!'}
     else:
         # Log in user by storing the user's email in session
-        session["user_email"] = user.email
+        #session["user_email"] = user.email
         # flash(f"Welcome back, {user.fname}!")
+        print(f'\n\nWelcome back {user.fname} {user.lname}!\n\n')
 
-    return redirect("/")
+    return { 'status': 'Login SUCCESSFUL!'}
 
 
 @app.route("/logout")
@@ -142,34 +152,70 @@ def all_locations():
     user_email = session.get("user_email")
     user = crud.get_user_by_email(user_email)
 
-    #-------------------------------------------------
-    # -- Temp code 
-    crud.add_bookmarks(user, locations[0])
-    crud.add_bookmarks(user, locations[2])
-
     fav_locations = crud.get_favs_by_user(user.user_id)
-    print(f"\n===== ***** {fav_locations} ***** =====\n")
-    #-------------------------------------------------
 
     return render_template("all_locations.html", locations=locations, fav_locations=fav_locations, active_page=active_page)
+
+
+# @app.route("/locations/<location_id>")
+# def show_location(location_id):
+#     """Show details on a particular location."""
+
+#     active_page = ''
+#     user_email = session.get("user_email")
+#     user = crud.get_user_by_email(user_email)
+
+#     location = crud.get_location_by_id(location_id)
+#     comments = crud.get_comments_by_location(location_id)
+
+#     if location is None:
+#         # flash("Location not found. Please enter a new location.")
+#         return redirect("/")
+
+#     return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY, active_page=active_page, user=user)
 
 
 @app.route("/locations/<location_id>")
 def show_location(location_id):
     """Show details on a particular location."""
 
-    active_page = ''
-    user_email = session.get("user_email")
-    user = crud.get_user_by_email(user_email)
+    # active_page = ''
+    # user_email = session.get("user_email")
+    # user = crud.get_user_by_email()
 
-    location = crud.get_location_by_id(location_id)
-    comments = crud.get_comments_by_location(location_id)
+    # location = crud.get_location_by_id(location_id)
+    # comments = crud.get_comments_by_location(location_id)
+    comments = crud.get_comments_by_location(1)
+    print(f'\n\n{{"members": {comments}}}\n\n')
+    # print(f'\n\nServer result: {comments}\n\n')
+    # print({"members": {comments}})
 
-    if location is None:
-        # flash("Location not found. Please enter a new location.")
-        return redirect("/")
+    sample = [
+        {
+          "comment_id": "1",
+          "user_id": "1",
+          "comment": "Test 1"
+        },
+        {
+          "comment_id": "2",
+          "user_id": "1",
+          "comment": "Test 2 successful"
+        },
+    ]
 
-    return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY, active_page=active_page, user=user)
+    # if location is None:
+    #     # flash("Location not found. Please enter a new location.")
+    #     return redirect("/")
+
+    # return render_template("location_details.html", location=location, comments=comments, google_api_key=GOOGLE_MAPS_API_KEY, active_page=active_page, user=user)
+    return (f'{{"members": {comments}}}')
+    #--- Working test data
+    # return {"members": [
+    #     {"comment_id": 1, "user_name": "Tony Stark", "comment": "Comment 1"},
+    #     {"comment_id": 2, "user_name": "Steve Rogers", "comment": "Comment 2"},
+    #     {"comment_id": 3, "user_name": "Dr Strange", "comment": "Comment 3"}
+    # ]}
+
 
 
 @app.route("/locations/<location_id>/comments", methods=["POST"])
@@ -236,23 +282,48 @@ def all_users():
     return render_template("all_users.html", users=users, active_page=active_page)
 
 
+### Web/Jinja
+# @app.route("/users", methods=["POST"])
+# def register_user():
+#     """Create a new user."""
+
+#     email = request.form.get("email")
+#     password = request.form.get("password")
+
+#     user = crud.get_user_by_email(email)
+#     if user:
+#         flash("Cannot create an account with that email. Try again.")
+#     else:
+#         user = crud.create_user('fname', 'lname', email, password, '408-000-8888', datetime.now(), True)
+#         db.session.add(user)
+#         db.session.commit()
+#         flash("Account created! Please log in.")
+
+#     return redirect("/")
+
+
+### React native
 @app.route("/users", methods=["POST"])
 def register_user():
     """Create a new user."""
 
-    email = request.form.get("email")
-    password = request.form.get("password")
+    email = request.json['email']
+    password = request.json['password']
+    user_agent = request.headers.get('User-Agent')
+    print(f'\n\n ===== Users POST successful! {email, password, user_agent} =====\n\n')
 
     user = crud.get_user_by_email(email)
     if user:
-        flash("Cannot create an account with that email. Try again.")
+        print("\n\n ***** Email already exists. Please enter a valid email. *****\n\n")
+        return { 'status': 'Failed. Email already exists' }
     else:
         user = crud.create_user('fname', 'lname', email, password, '408-000-8888', datetime.now(), True)
         db.session.add(user)
         db.session.commit()
-        flash("Account created! Please log in.")
+        print("Account created! Please log in.")
+        return { 'status': 'Success! Account created.' }
 
-    return redirect("/")
+
 
 
 @app.route("/users/<user_id>")
@@ -273,7 +344,9 @@ def update_comment():
     db.session.commit()
 
     return "Success"
-
+# @app.route("/update_comment", methods=["POST"])
+# def update_comment():
+#     update_my_comment()
 
 @app.route("/add_bookmark", methods=["POST"])
 def add_bookmark():
@@ -435,6 +508,19 @@ def get_current_user():
     if user_email:
         user = crud.get_user_by_email(user_email)
         return user 
+
+@app.route('/test')
+def test():
+    """ Return test JSON """
+    print('Test successful')
+
+    # return jsonify({"success": True, "message": "this is the create endpoint"})
+    return [
+            {"id": "1", "name": "Tony Stark", "comment": "Courts open!", "dateTime": "Mon 2pm"},
+            {"id": "2", "name": "Steve Rogers", "comment": "Courts full!", "dateTime": "Mon 3pm"},
+            {"id": "3", "name": "Dr Strange", "comment": "No parking!", "dateTime": "Mon 3:30pm"},
+            {"id": "4", "name": "Hawkeye", "comment": "All clear!", "dateTime": "Mon 4:30pm"},
+           ]
 
 
 if __name__ == "__main__":

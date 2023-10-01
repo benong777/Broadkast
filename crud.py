@@ -198,7 +198,10 @@ def get_history_by_user_and_location(user_id, location_id):
 def get_comments_by_location(location_id):
     """Return comments for a location"""
 
-    return Comment.query.filter(Comment.location_id == location_id).order_by(Comment.created_at.desc()).all()
+    # return Comment.query.filter(Comment.location_id == location_id).order_by(Comment.created_at.desc()).all()
+    comments = Comment.query.filter(Comment.location_id == location_id).order_by(Comment.created_at.desc()).all()
+    print(f"\n\n CRUD result: {comments}")
+    return comments
 
 
 

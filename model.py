@@ -68,8 +68,12 @@ class Comment(db.Model):
     user = db.relationship("User", back_populates="comments")
     location = db.relationship("Location", back_populates="comments")
 
+    # def __repr__(self):
+    #     return f"<Comment user={self.user} location={self.location} comment={self.comment}>"
+
     def __repr__(self):
-        return f"<Comment user={self.user} location={self.location} comment={self.comment}>"
+        return f'{{"comment_id": {self.comment_id}, "user_name": "{self.user_id}", "location_id": {self.location_id}, "comment": "{self.comment}"}}'
+        # return {"comment_id": {self.comment_id}, "user_name": "{self.user_id}", "location_id": {self.location_id}, "comment": "{self.comment}"}
 
 
 class Rating(db.Model):
