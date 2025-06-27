@@ -2,6 +2,10 @@
 
 An app where users can communicate and post location information and status.
 
+* ( VIDEO DEMO ):
+https://www.youtube.com/watch?v=uR9E_H1A_zA
+
+
 ## Technologies Required
 
 - Google Places API
